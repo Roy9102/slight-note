@@ -10,10 +10,9 @@ var {
   StyleSheet,
   Text,
   View,
-  ScrollView,
 } = React;
 
-var slightNote = React.createClass({
+var xiaowa = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
@@ -27,11 +26,6 @@ var slightNote = React.createClass({
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
-        <ScrollView>
-           <TouchableHighlight onPress={() => console.log('pressed')}>
-            <Text>Proper Touch Handling</Text>
-          </TouchableHighlight>
-        </scrollView>
       </View>
     );
   }
@@ -56,4 +50,4 @@ var styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('slightNote', () => slightNote);
+AppRegistry.registerComponent('xiaowa', () => xiaowa);

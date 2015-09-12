@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "slightNote.app"
-               BlueprintName = "slightNote"
-               ReferencedContainer = "container:slightNote.xcodeproj">
+               BuildableName = "xiaowa.app"
+               BlueprintName = "xiaowa"
+               ReferencedContainer = "container:xiaowa.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "slightNoteTests.xctest"
-               BlueprintName = "slightNoteTests"
-               ReferencedContainer = "container:slightNote.xcodeproj">
+               BuildableName = "xiaowaTests.xctest"
+               BlueprintName = "xiaowaTests"
+               ReferencedContainer = "container:xiaowa.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "slightNoteTests.xctest"
-               BlueprintName = "slightNoteTests"
-               ReferencedContainer = "container:slightNote.xcodeproj">
+               BuildableName = "xiaowaTests.xctest"
+               BlueprintName = "xiaowaTests"
+               ReferencedContainer = "container:xiaowa.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "slightNote.app"
-            BlueprintName = "slightNote"
-            ReferencedContainer = "container:slightNote.xcodeproj">
+            BuildableName = "xiaowa.app"
+            BlueprintName = "xiaowa"
+            ReferencedContainer = "container:xiaowa.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "slightNote.app"
-            BlueprintName = "slightNote"
-            ReferencedContainer = "container:slightNote.xcodeproj">
+            BuildableName = "xiaowa.app"
+            BlueprintName = "xiaowa"
+            ReferencedContainer = "container:xiaowa.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -96,9 +96,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "slightNote.app"
-            BlueprintName = "slightNote"
-            ReferencedContainer = "container:slightNote.xcodeproj">
+            BuildableName = "xiaowa.app"
+            BlueprintName = "xiaowa"
+            ReferencedContainer = "container:xiaowa.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
