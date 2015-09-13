@@ -1,5 +1,5 @@
 /**
- * Sample React Native App
+ * Xiaowa
  * https://github.com/facebook/react-native
  */
 'use strict';
