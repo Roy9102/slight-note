@@ -14,13 +14,14 @@ var {
   View,
   Image,
   ListView,
+  ScrollView,
 } = React;
 
 var xiaowa = React.createClass({
   getInitialState: function() {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return {
-      dataSource: ds.cloneWithRows(['这是一个晴朗的早晨。我在公司门口...', '这是一个晴朗的早晨。我在公司门口...']),
+      dataSource: ds.cloneWithRows(['这是一个晴朗的早晨。我在公司门口...', '这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...']),
     };
   },
   render_list : function(rowData){
@@ -29,9 +30,9 @@ var xiaowa = React.createClass({
             <Image
               style={styles.listicon}
               source={require('image!listIcon')}
-
             />
             <Text style={styles.listItemText}>{rowData}</Text>
+            
           </View>
       )
   },
@@ -48,11 +49,13 @@ var xiaowa = React.createClass({
           style={styles.top_bar_wiaowa}
           source={require('image!xiaowa')}
         />
-        <ListView
-          style={styles.listStyle}
-          dataSource={this.state.dataSource}
-          renderRow={this.render_list}
-        />
+        <ScrollView style={styles.scrollview}>
+          <ListView
+            style={styles.listStyle}
+            dataSource={this.state.dataSource}
+            renderRow={this.render_list}
+          />
+        </ScrollView>
       </View>
     );
   }
@@ -85,8 +88,8 @@ var styles = StyleSheet.create({
     top:30,
     backgroundColor:'rgba(0,0,0,0)'
   },
-  listStyle:{
-    marginTop:18
+  scrollview:{
+    marginTop:0
   },
   listItem:{
     height:50,
