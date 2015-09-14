@@ -5,6 +5,10 @@
 'use strict';
 
 var React = require('react-native');
+var addNew = require('./addNew');
+var NavBar = require('./NavBar');
+var NavBtn = require('./NavButton');
+console.log(NavBtn)
 // var colorConfig = require('/ColorCoinfig');
 // console.log(colorConfig)
 var {
@@ -15,6 +19,8 @@ var {
   Image,
   ListView,
   ScrollView,
+  Navigator,
+  NavigatorIOS,
 } = React;
 
 var xiaowa = React.createClass({
@@ -24,6 +30,12 @@ var xiaowa = React.createClass({
       dataSource: ds.cloneWithRows(['这是一个晴朗的早晨。我在公司门口...', '这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...','这是一个晴朗的早晨。我在公司门口...']),
     };
   },
+  onAddPress : function(){
+    this.props.navigator.push({
+      title:'addNew',
+      index:1
+    })
+  },
   render_list : function(rowData){
       return (
           <View style={styles.listItem}>
@@ -32,19 +44,13 @@ var xiaowa = React.createClass({
               source={require('image!listIcon')}
             />
             <Text style={styles.listItemText}>{rowData}</Text>
-            
           </View>
       )
   },
   render: function() {
     return (
+      
       <View style={styles.container}>
-        <View style={styles.top_bar}>
-          <Image
-          style={styles.plus}
-          source={require('image!add')}
-        />
-        </View>
         <Image
           style={styles.top_bar_wiaowa}
           source={require('image!xiaowa')}
@@ -116,3 +122,6 @@ var styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('xiaowa', () => xiaowa);
+
+
+
