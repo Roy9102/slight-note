@@ -5,7 +5,7 @@
 'use strict';
 
 var React = require('react-native');
-var NavBtn = require('./NavButton');
+var NavBtn = require('./NavButton')
 
 var {
   AppRegistry,
@@ -96,6 +96,7 @@ var NavBar = React.createClass({
     };
 
     var Content = route.component;
+    console.log(Content);
 
     // Remove the margin of the navigation bar if not using navigation bar
     var extraStyling = {};
@@ -104,7 +105,20 @@ var NavBar = React.createClass({
     }
     
     return (
-      <View>
+      <View
+        style={[styles.container, this.props.bgStyle, extraStyling]}
+        onStartShouldSetResponder={didStartDrag}
+        onResponderMove={didMoveFinger}
+        onResponderTerminationRequest={preventDefault}>
+        <Content
+          name={route.name}
+          index={route.index}
+          data={route.data}
+          toRoute={goForward}
+          toBack={goBackwards}
+          reset={goToFirstRoute}
+          customAction={customAction}
+        />
       </View>
     )
     

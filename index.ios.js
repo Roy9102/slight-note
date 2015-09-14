@@ -8,7 +8,6 @@ var React = require('react-native');
 var addNew = require('./addNew');
 var NavBar = require('./NavBar');
 var NavBtn = require('./NavButton');
-console.log(NavBtn)
 // var colorConfig = require('/ColorCoinfig');
 // console.log(colorConfig)
 var {
@@ -49,7 +48,6 @@ var xiaowa = React.createClass({
   },
   render: function() {
     return (
-      
       <View style={styles.container}>
         <Image
           style={styles.top_bar_wiaowa}
