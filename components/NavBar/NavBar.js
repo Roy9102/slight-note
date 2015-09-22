@@ -1,22 +1,16 @@
-/**
- * Xiaowa
- * https://github.com/facebook/react-native
- */
 'use strict';
 
 var React = require('react-native');
-var NavBtn = require('./NavButton')
+
+var NavBarContainer = require('./NavBarContainer');
 
 var {
-  AppRegistry,
   StyleSheet,
-  Text,
-  View,
-  Image,
-  ListView,
-  ScrollView,
   Navigator,
+  StatusBarIOS,
+  View,
 } = React;
+
 
 var NavBar = React.createClass({
 
@@ -31,7 +25,11 @@ var NavBar = React.createClass({
     }
   },
 
-
+  /* 
+   * This changes the title in the navigation bar
+   * It should preferrably be called for "onWillFocus" instad >
+   * > but a recent update to React Native seems to break the animation
+   */
   onDidFocus: function(route) {
     this.setState({ route: route });
   },
@@ -96,7 +94,6 @@ var NavBar = React.createClass({
     };
 
     var Content = route.component;
-    console.log(Content);
 
     // Remove the margin of the navigation bar if not using navigation bar
     var extraStyling = {};
@@ -160,5 +157,15 @@ var NavBar = React.createClass({
     )
   }
 });
+
+
+var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#82d6c6',
+    marginTop: 64
+  },
+});
+
 
 module.exports = NavBar;

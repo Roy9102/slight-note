@@ -22,7 +22,7 @@ var newPage = React.createClass({
   render :function() {
     return (
       <View>
-        <Text>This is the fdsaafdsafdnfdsaew pagefdsafdsafda</Text>
+        <Text>fdsafdsafdsaf</Text>
       </View>
     )
   }
