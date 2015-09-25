@@ -24,7 +24,7 @@ var searchAndEdit = React.createClass({
 	render (){
 		return (
 			<View style={style.container}>
-			
+				<SearchInput />
 				<Image style={style.icon} source={require('image!add_icon')}/>
 			</View>
 		)
@@ -42,13 +42,14 @@ var style = StyleSheet.create({
     	marginRight: 15
 	},
 	input: {
-	    backgroundColor: '#3f88bf',
-	    width: 220,
+	    backgroundColor: 'transparent',
+	    width: 200,
 	    height: 32,
 	    marginTop: 6,
-	    paddingLeft: 10,
 	    color: 'white',
-	    borderRadius: 4
+	    borderRadius: 4,
+	    borderWidth:1,
+	    borderColor:'#ffffff'
 	  }
 })
 

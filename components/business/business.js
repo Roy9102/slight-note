@@ -6,6 +6,7 @@
 'use strict';
 
 var React = require('react-native');
+var addNew = require('../../pages/addNew');
 
 var {
 	View,
@@ -18,7 +19,11 @@ var {
 
 var Business = React.createClass({
 	onPress () {
-
+		this.props.goToDetail({
+			name:'ItemDetail',
+			component:addNew,
+			data:this.props
+		})
 	},
 
 	getIconList (arr) {
@@ -26,7 +31,6 @@ var Business = React.createClass({
 		for ( var i = 0 ; i < arr.length; i++ ){
 			res.push(this.getIconImg(arr[i]));
 		}
-		console.log(res);
 		return res;
 	},
 
@@ -80,6 +84,7 @@ var Business = React.createClass({
 			<TouchableHighlight style={styles.touchEffect}
 				underlayColor = 'rgba(0,0,0,0)'
 				activeOpacity = "0.8"
+				onPress = {this.onPress}
 			>
 				<View style={styles.listItem}>
 					<Image

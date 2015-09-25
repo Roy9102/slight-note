@@ -5,17 +5,17 @@
 'use strict';
 
 var React = require('react-native');
-var addNew = require('./addNew');
+
 var NavBar = require('./components/NavBar/NavBar');
 var Business = require('./components/business/business');
 
 var XiaoWaBtn = require('./components/XiaoWaIcon/xiaowa');
 var searchAndEdit = require('./components/searchAndEdit/searchAndEdit')
-
+var addBussiness = require('./components/icon/addBusiness');
 
 
 //页面组件
-var HomePage = require('./homePage');
+var HomePage = require('./pages/homePage');
 
 var {
   AppRegistry,
@@ -30,7 +30,8 @@ var {
 
 var firstRoute = {
   name: '',
-  component: HomePage
+  component: HomePage,
+  rightCorner : addBussiness
 };
 
 var xiaowa = React.createClass({
@@ -42,8 +43,7 @@ var xiaowa = React.createClass({
       <NavBar 
         firstRoute={firstRoute} 
         headerStyle={styles.header}
-        backButtonComponent={XiaoWaBtn}
-        rightCorner={searchAndEdit}
+        
       />
     );
   }

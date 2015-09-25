@@ -22,9 +22,15 @@ var newPage = React.createClass({
   render :function() {
     return (
       <View>
-        <Text>fdsafdsafdsaf</Text>
+        <Text>create one here</Text>
       </View>
     )
+  }
+});
+
+var styles = StyleSheet.create({
+  container:{
+    backgroundColor:'#fff',
   }
 })
 
