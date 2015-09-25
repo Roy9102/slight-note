@@ -6,7 +6,7 @@
 'use strict';
 
 var React = require('react-native');
-var addNew = require('../../pages/addNew');
+var detailPage = require('../../pages/detailPage');
 
 var {
 	View,
@@ -21,7 +21,7 @@ var Business = React.createClass({
 	onPress () {
 		this.props.goToDetail({
 			name:'ItemDetail',
-			component:addNew,
+			component:detailPage,
 			data:this.props
 		})
 	},

@@ -2,18 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "img_set.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "img_set@2x.png"
+      "filename" : "camera@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "img_set-2.png"
+      "scale" : "3x"
     }
   ],
   "info" : {
