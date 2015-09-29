@@ -23,47 +23,47 @@ var Homepage = React.createClass({
 			    {
 			        title:'这是一个晴朗的在公司门口吃了...',
 			        date : '上午 11：06   2014-08-08',
-			        iconArray:['taxi','alarm','img_set','record'],
+			        iconArray:['taxi','alarm','photo','record'],
 			    },
 			    {
 			        title:'这是一个晴朗的在公司门口吃了...',
 			        date : '上午 11：06   2014-08-08',
-			        iconArray:['alarm','img_set','record'],
+			        iconArray:['alarm','photo','record'],
 			    },
 			    {
 			        title:'这是一个晴朗的在公司门口吃了...',
 			        date : '上午 11：06   2014-08-08',
-			        iconArray:['taxi','alarm','img_set'],
+			        iconArray:['taxi','alarm','photo'],
 			    },
 			    {
 			        title:'这是一个晴朗的在公司门口吃了...',
 			        date : '上午 11：06   2014-08-08',
-			        iconArray:['taxi','alarm','img_set','record'],
+			        iconArray:['taxi','alarm','photo','record'],
 			    },
 			    {
 			        title:'这是一个晴朗的在公司门口吃了...',
 			        date : '上午 11：06   2014-08-08',
-			        iconArray:['alarm','img_set','record'],
+			        iconArray:['alarm','photo','record'],
 			    },
 			    {
 			        title:'这是一个晴朗的在公司门口吃了...',
 			        date : '上午 11：06   2014-08-08',
-			        iconArray:['taxi','alarm','img_set'],
+			        iconArray:['taxi','alarm','photo'],
 			    },
 			    {
 			        title:'这是一个晴朗的在公司门口吃了...',
 			        date : '上午 11：06   2014-08-08',
-			        iconArray:['taxi','alarm','img_set','record'],
+			        iconArray:['taxi','alarm','photo','record'],
 			    },
 			    {
 			        title:'这是一个晴朗的在公司门口吃了...',
 			        date : '上午 11：06   2014-08-08',
-			        iconArray:['alarm','img_set','record'],
+			        iconArray:['alarm','photo','record'],
 			    },
 			    {
 			        title:'这是一个晴朗的在公司门口吃了...',
 			        date : '上午 11：06   2014-08-08',
-			        iconArray:['taxi','alarm','img_set'],
+			        iconArray:['taxi','alarm','photo'],
 			    }
 		  	]),
 		};

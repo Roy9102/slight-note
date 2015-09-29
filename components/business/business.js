@@ -45,11 +45,11 @@ var Business = React.createClass({
 						/>
 					)
 				break;
-			case 'img_set' : 
+			case 'photo' : 
 				res = (
 						<Image 
 							style = {styles.cIcon}
-							source = {require('image!img_set')}
+							source = {require('image!photo')}
 						/>
 					)
 				break;
@@ -139,9 +139,10 @@ var styles = StyleSheet.create({
 	cIcon:{
 		flex:1,
 		position:'relative',
-		width:21,
-		height:21,
-		left:12
+		width:16,
+		height:16,
+		left:12,
+		marginRight:12
 	},
 	date:{
 		position:'absolute',
