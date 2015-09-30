@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var addNew = require('../../pages/addNew');
+var CheckAndPlane = require('./CheckAndPlane');
 
 var {
 	StyleSheet,
@@ -17,7 +18,7 @@ var CreateOne = React.createClass({
 		this.props.toRoute({
 			name:'create',
 			component:addNew,
-			rightCorner:''
+			rightCorner:CheckAndPlane
 		})
 	},
 
