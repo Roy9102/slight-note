@@ -14,12 +14,14 @@ var {
   ListView,
   ScrollView,
   TouchableHighlight,
-  TextInput
+  TextInput,
+  CameraRoll
 } = React;
+
 
 var FuncIcon = React.createClass({
     onPress (){
-
+        CameraRoll.saveImageWithTag()
     },
 
     render_img (img){
