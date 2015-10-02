@@ -13,11 +13,63 @@ var {
 	Text,
 	Image,
 	StyleSheet,
-	TouchableHighlight
+	TouchableHighlight,
+	Animated
 } = React;
 
+var Dimensions = require('Dimensions');
+var {
+  width,
+  height
+} = Dimensions.get('window');
 
+var SPRING_CONFIG = {tension: 2, friction: 3}; //Soft spring
 var Business = React.createClass({
+	getInitialState (){
+		return {
+			dragStartX : null,
+			didSwitchView : null,
+			pan : new Animated.ValueXY()
+		}
+	},
+	getStyle () {
+	return [
+			styles.listItem, 
+			{
+				transform: this.state.pan.getTranslateTransform()
+			}
+		];
+	},
+
+	moveItem (){
+		 Animated.spring(this.state.pan, {
+	        ...SPRING_CONFIG,
+	        toValue: {x: 62, y: 0}                        // return to start
+	    }).start();
+	},
+
+	didStartDrag (evt){
+		var x = evt.nativeEvent.pageX;
+		if (x > 16) {
+		    this.setState({ 
+		    	dragStartX: x, 
+		      	didSwitchView: false
+		    });
+		    return true;
+		}
+	},
+
+	didMoveFinger (evt){
+		var draggedAway = ((evt.nativeEvent.pageX - this.state.dragStartX) > 30);
+		if (!this.state.didSwitchView && draggedAway) {
+			this.moveItem();
+			this.setState({ didSwitchView: true });
+		}else{
+			return false;
+		}
+
+	},
+
 	onPress () {
 		this.props.goToDetail({
 			name:'ItemDetail',
@@ -81,36 +133,37 @@ var Business = React.createClass({
 			iconArray,
 		} = this.props;
 		return (
-			<View style={styles.itemContainer}>
+			<View style={styles.itemContainer} >
+				<View style={styles.deleteIcon}>
+					<Image style={styles.trash} source={require('image!trash')} />
+					<Text style={styles.trashText}>删除</Text>
+				</View>
 				<TouchableHighlight style={styles.touchEffect}
 					underlayColor = 'rgba(0,0,0,0)'
 					activeOpacity = "0.8"
+					ref = "touchable"
 					onPress = {this.onPress}
 				>
-					<View style={styles.listItem}>
-						<Image
-							style={[styles.listicon,styles.line]}
-							source={require('image!line')}
-						/>
+					<Animated.View style={this.getStyle()}
+						onStartShouldSetResponder={this.didStartDrag}
+        				onResponderMove={this.didMoveFinger}
+
+					>
 						<Image
 							style={[styles.listicon,styles.ellipse]}
 							source={require('image!ellipse')}
 						/>
-						<View>
-							<Text style={styles.literation}>{literation}</Text>
-							<Text style={styles.date}>{date}</Text>
-							<View style={styles.iconArray}>
-								{this.getIconList(iconArray)}
-							</View>
+						<Text style={styles.literation}>{literation}</Text>
+						<Text style={styles.date}>{date}</Text>
+						<View style={styles.iconArray}>
+							{this.getIconList(iconArray)}
 						</View>
-					</View>
+					</Animated.View>
 				</TouchableHighlight>
-				
-					<View style={styles.deleteIcon}>
-						<Image style={styles.trash} source={require('image!trash')} />
-						<Text style={styles.trashText}>删除</Text>
-					</View>
-				
+				<Image
+					style={[styles.listicon,styles.line]}
+					source={require('image!line')}
+				/>
 			</View>
 		)
 	}
@@ -122,36 +175,38 @@ var styles = StyleSheet.create({
 		position:'relative',
 		flex:1,
 		marginTop:0,
+		left:0
 	},
 	touchEffect:{
 		backgroundColor:'rgba(0,0,0,0)',
+		margin:16,
 	},
 	listItem:{
 		backgroundColor:'#FFFFFF',
 		height:62,
 		borderRadius:6,
 		padding:12,
-		margin:10,
 	},
 	literation : {
 		color:'#ae6137',
 		backgroundColor:'rgb(255,255,255)',
-		paddingLeft:12,
 		flex:1,
+		marginLeft:12
 	},
 	listicon:{
 		position:'absolute',
+		backgroundColor:'rgba(0,0,0,0)',
 		resizeMode: Image.resizeMode.contain,
-		backgroundColor:'rgba(0,0,0,0)'
+		width:24,
 	},
 	line:{
-		width:16,
-		left:-10,
-		top:28,
-	},
-	ellipse:{
 		height:12,
 		left:0,
+		top:45,
+	},
+	ellipse:{
+		width:16,
+		left:3,
 		top:25,
 	},
 	deleteIcon:{
@@ -159,11 +214,12 @@ var styles = StyleSheet.create({
 		backgroundColor:'#fc4859',
 		flexDirection:'row',
 		padding:8,
-		left:13,
-		top:25
+		left:21,
+		top:34
 	},
 	trash:{
 		height:14,
+		resizeMode: Image.resizeMode.contain,
 	},
 	trashText:{
 		color:'#fff',
@@ -175,8 +231,8 @@ var styles = StyleSheet.create({
 		position:'absolute',
 		backgroundColor:'rgba(0,0,0,0)',
 		flexDirection:'row',
-		bottom:-24,
-		left:0,
+		bottom:6,
+		left:12,
 	},
 	cIcon:{
 		flex:1,
@@ -192,7 +248,7 @@ var styles = StyleSheet.create({
 		flex:1,
 		fontSize:10,
 		right:6,
-		bottom:-24
+		bottom:6
 	}
 });
 
