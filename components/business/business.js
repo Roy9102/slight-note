@@ -66,6 +66,7 @@ var Business = React.createClass({
 			this.setState({ didSwitchView: true });
 		}else{
 			return false;
+			
 		}
 
 	},
