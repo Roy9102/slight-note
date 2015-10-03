@@ -7,6 +7,8 @@
 
 var React = require('react-native');
 var detailPage = require('../../pages/detailPage');
+var SPRING_CONFIG = {tension: 6, friction: 2}; //Soft spring
+
 
 var {
 	View,
@@ -17,18 +19,13 @@ var {
 	Animated
 } = React;
 
-var Dimensions = require('Dimensions');
-var {
-  width,
-  height
-} = Dimensions.get('window');
 
-var SPRING_CONFIG = {tension: 2, friction: 3}; //Soft spring
+
 var Business = React.createClass({
 	getInitialState (){
 		return {
 			dragStartX : null,
-			didSwitchView : null,
+			didSlideItem : null,
 			pan : new Animated.ValueXY()
 		}
 	},
@@ -36,15 +33,15 @@ var Business = React.createClass({
 	return [
 			styles.listItem, 
 			{
-				transform: this.state.pan.getTranslateTransform()
+				transform: this.state.pan.getTranslateTransform(),
 			}
 		];
 	},
 
-	moveItem (){
-		 Animated.spring(this.state.pan, {
+	ToggleItem (x){
+		Animated.spring(this.state.pan, {
 	        ...SPRING_CONFIG,
-	        toValue: {x: 62, y: 0}                        // return to start
+	        toValue: {x: x, y: 0}                        // return to start
 	    }).start();
 	},
 
@@ -53,22 +50,23 @@ var Business = React.createClass({
 		if (x > 16) {
 		    this.setState({ 
 		    	dragStartX: x, 
-		      	didSwitchView: false
+		      	didSlideItem: false
 		    });
 		    return true;
 		}
 	},
 
 	didMoveFinger (evt){
-		var draggedAway = ((evt.nativeEvent.pageX - this.state.dragStartX) > 30);
-		if (!this.state.didSwitchView && draggedAway) {
-			this.moveItem();
-			this.setState({ didSwitchView: true });
+		var draggedAway = evt.nativeEvent.pageX - this.state.dragStartX;
+		if (!this.state.didSlideItem && draggedAway > 20 && this.state.pan.x._value === 0 ) {
+			this.ToggleItem(62);
+			this.setState({ didSlideItem: true });
+		}else if (!this.state.didSlideItem && draggedAway < -20 && this.state.pan.x._value === 62 ) {
+			this.ToggleItem(0);
 		}else{
-			return false;
-			
+			this.ToggleItem(0);
+			this.onPress();
 		}
-
 	},
 
 	onPress () {
@@ -139,28 +137,20 @@ var Business = React.createClass({
 					<Image style={styles.trash} source={require('image!trash')} />
 					<Text style={styles.trashText}>删除</Text>
 				</View>
-				<TouchableHighlight style={styles.touchEffect}
-					underlayColor = 'rgba(0,0,0,0)'
-					activeOpacity = "0.8"
-					ref = "touchable"
-					onPress = {this.onPress}
+				<Animated.View style={this.getStyle()}
+					onStartShouldSetResponder={this.didStartDrag}
+    				onResponderRelease={this.didMoveFinger}
 				>
-					<Animated.View style={this.getStyle()}
-						onStartShouldSetResponder={this.didStartDrag}
-        				onResponderMove={this.didMoveFinger}
-
-					>
-						<Image
-							style={[styles.listicon,styles.ellipse]}
-							source={require('image!ellipse')}
-						/>
-						<Text style={styles.literation}>{literation}</Text>
-						<Text style={styles.date}>{date}</Text>
-						<View style={styles.iconArray}>
-							{this.getIconList(iconArray)}
-						</View>
-					</Animated.View>
-				</TouchableHighlight>
+					<Image
+						style={[styles.listicon,styles.ellipse]}
+						source={require('image!ellipse')}
+					/>
+					<Text style={styles.literation}>{literation}</Text>
+					<Text style={styles.date}>{date}</Text>
+					<View style={styles.iconArray}>
+						{this.getIconList(iconArray)}
+					</View>
+				</Animated.View>
 				<Image
 					style={[styles.listicon,styles.line]}
 					source={require('image!line')}
@@ -173,42 +163,36 @@ var Business = React.createClass({
 
 var styles = StyleSheet.create({
 	itemContainer:{
-		position:'relative',
 		flex:1,
-		marginTop:0,
-		left:0
-	},
-	touchEffect:{
-		backgroundColor:'rgba(0,0,0,0)',
-		margin:16,
 	},
 	listItem:{
 		backgroundColor:'#FFFFFF',
-		height:62,
+		height:72,
 		borderRadius:6,
 		padding:12,
+		margin:8,
+		marginLeft:16,
+		marginRight:16,
 	},
 	literation : {
 		color:'#ae6137',
 		backgroundColor:'rgb(255,255,255)',
 		flex:1,
-		marginLeft:12
+		marginLeft:20
 	},
 	listicon:{
 		position:'absolute',
 		backgroundColor:'rgba(0,0,0,0)',
 		resizeMode: Image.resizeMode.contain,
-		width:24,
 	},
 	line:{
-		height:12,
-		left:0,
+		left:-10,
 		top:45,
 	},
 	ellipse:{
 		width:16,
 		left:3,
-		top:25,
+		top:30,
 	},
 	deleteIcon:{
 		position:'absolute',
@@ -233,7 +217,7 @@ var styles = StyleSheet.create({
 		backgroundColor:'rgba(0,0,0,0)',
 		flexDirection:'row',
 		bottom:6,
-		left:12,
+		left:20,
 	},
 	cIcon:{
 		flex:1,

@@ -16,7 +16,7 @@ var {
 var ItemDetails = React.createClass({
   render :function() {
     return (
-      <View>
+      <View style={styles.detailContainer}>
         <Text>fdsafdsa</Text>
       </View>
     )
@@ -24,7 +24,8 @@ var ItemDetails = React.createClass({
 });
 
 var styles = StyleSheet.create({
-  container:{
+  detailContainer:{
+  	flex:1,
     backgroundColor:'#fff',
   }
 })

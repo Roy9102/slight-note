@@ -3,6 +3,8 @@
 
 var React = require('react-native');
 var Business = require('../components/business/business');
+var DB    = require('../db');
+var DBEvents = require('react-native-db-models').DBEvents;
 
 var {
 	StyleSheet,
@@ -17,58 +19,36 @@ var {
 
 var Homepage = React.createClass({
 	getInitialState: function() {
-		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+		var dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		return {
-		  dataSource: ds.cloneWithRows([
-			    {
-			        title:'这是一个晴朗的在公司门口吃了...',
-			        date : '上午 11：06   2014-08-08',
-			        iconArray:['taxi','alarm','photo','record'],
-			    },
-			    {
-			        title:'这是一个晴朗的在公司门口吃了...',
-			        date : '上午 11：06   2014-08-08',
-			        iconArray:['alarm','photo','record'],
-			    },
-			    {
-			        title:'这是一个晴朗的在公司门口吃了...',
-			        date : '上午 11：06   2014-08-08',
-			        iconArray:['taxi','alarm','photo'],
-			    },
-			    {
-			        title:'这是一个晴朗的在公司门口吃了...',
-			        date : '上午 11：06   2014-08-08',
-			        iconArray:['taxi','alarm','photo','record'],
-			    },
-			    {
-			        title:'这是一个晴朗的在公司门口吃了...',
-			        date : '上午 11：06   2014-08-08',
-			        iconArray:['alarm','photo','record'],
-			    },
-			    {
-			        title:'这是一个晴朗的在公司门口吃了...',
-			        date : '上午 11：06   2014-08-08',
-			        iconArray:['taxi','alarm','photo'],
-			    },
-			    {
-			        title:'这是一个晴朗的在公司门口吃了...',
-			        date : '上午 11：06   2014-08-08',
-			        iconArray:['taxi','alarm','photo','record'],
-			    },
-			    {
-			        title:'这是一个晴朗的在公司门口吃了...',
-			        date : '上午 11：06   2014-08-08',
-			        iconArray:['alarm','photo','record'],
-			    },
-			    {
-			        title:'这是一个晴朗的在公司门口吃了...',
-			        date : '上午 11：06   2014-08-08',
-			        iconArray:['taxi','alarm','photo'],
-			    }
-		  	]),
+		  dataSource: dataSource
 		};
 	},
+
+	fetchData(){
+		var me = this;
+		 DB.bussiness.get_all(function(result){
+            console.log(result);
+            me.setState({
+            	dataSource: me.state.dataSource.cloneWithRows(me.OBJtoARRAY(result.rows)),
+            })
+        })
+	},
+
+	OBJtoARRAY (obj){
+		var arr = [];
+		for(var key in obj){
+			arr.push(obj[key]);
+		}
+		return arr;
+	},
+
+	componentDidMount (){
+		this.fetchData();
+	},
+
   	render_list : function(rowData){
+  		console.log(rowData);
       	return (
 	        <Business 
 	        	{...rowData}
@@ -84,13 +64,13 @@ var Homepage = React.createClass({
   	render: function() {
 	    return (
 		    <View style={styles.container}>
-		        <ScrollView style={styles.scrollview}>
+		        
 		          <ListView
 		            style={styles.listStyle}
 		            dataSource={this.state.dataSource}
 		            renderRow={this.render_list}
 		          />
-		        </ScrollView>
+		        
 		    </View>
 	    );
 	  }
@@ -100,6 +80,15 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fcf6dc',
+  },
+  scrollview:{
+  	marginTop:-32,
+  	backgroundColor:'green',
+  	flex:1,
+  },
+  listStyle:{
+  	flexDirection:'column',
+  	backgroundColor:'red',
   }
 });
 

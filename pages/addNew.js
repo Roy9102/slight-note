@@ -5,6 +5,8 @@
 'use strict';
 
 var React = require('react-native');
+var DB    = require('../db');
+var DBEvents = require('react-native-db-models').DBEvents;
 
 var {
   StyleSheet,
@@ -15,7 +17,8 @@ var {
   ScrollView,
   TouchableHighlight,
   TextInput,
-  CameraRoll
+  CameraRoll,
+  AsyncStorage
 } = React;
 
 
@@ -86,35 +89,60 @@ var FuncIcon = React.createClass({
 
 
 var newPage = React.createClass({
+    getInitialState (){
+        return {
+            literation:''
+        }
+    },
+    fetchData (){
+        var me = this;
+        
+    },
+
+    onChangeText (text){
+        this.setState({
+            literation:text
+        })
+        DB.bussiness.add({
+            id:1,
+            title:'这是一个晴朗的在公司门口吃了...',
+            date : '上午 11：06   2014-08-08',
+            iconArray:['taxi','alarm','photo','record']
+        });   
+    },
 
 
-  render (){
-    return (
-        <View style={styles.container}>
-            <ScrollView style={styles.inputbox}>
-                <TextInput style={styles.textarea} placeholder="Here is you notice" />
-            </ScrollView>
-            <View style={styles.ele_list}>
-                <Image style={styles.icon} source={require('image!smiley')} />
-                <Image style={styles.icon} source={require('image!photo')} />
-                <Image style={styles.icon} source={require('image!camera')} />
-                <Image style={[styles.icon,styles.right]} source={require('image!plus_gray')} />                
-            </View>
-            <View style={styles.itemType}>
-                <View style={styles.typeRow}>
-                    <FuncIcon img='taxi_150' text='出行计划' />
-                    <FuncIcon img='alarm' text='闹钟提醒' />
-                    <FuncIcon img='record' text='语音录制' />
+
+    componentDidMount(){
+        this.fetchData ()
+    },
+    render (){
+        return (
+            <View style={styles.container}>
+                <ScrollView style={styles.inputbox}>
+                    <TextInput ref="textinput" style={styles.textarea} placeholder="Here is you notice" value = {this.state.literation} onChangeText = {this.onChangeText} />
+                </ScrollView>
+                <View style={styles.ele_list}>
+                    <Image style={styles.icon} source={require('image!smiley')} />
+                    <Image style={styles.icon} source={require('image!photo')} />
+                    <Image style={styles.icon} source={require('image!camera')} />
+                    <Image style={[styles.icon,styles.right]} source={require('image!plus_gray')} />                
                 </View>
-                <View style={styles.typeRow}>
-                    <FuncIcon img='package' text='行李清单' />
-                    <FuncIcon img='shopping_cart' text='购物清单' />
-                    <FuncIcon img='video' text='视频录制' />
+                <View style={styles.itemType}>
+                    <View style={styles.typeRow}>
+                        <FuncIcon img='taxi_150' text='出行计划' />
+                        <FuncIcon img='alarm' text='闹钟提醒' />
+                        <FuncIcon img='record' text='语音录制' />
+                    </View>
+                    <View style={styles.typeRow}>
+                        <FuncIcon img='package' text='行李清单' />
+                        <FuncIcon img='shopping_cart' text='购物清单' />
+                        <FuncIcon img='video' text='视频录制' />
+                    </View>
                 </View>
             </View>
-        </View>
-    )
-  }
+        )
+    }
 });
 
 var styles = StyleSheet.create({

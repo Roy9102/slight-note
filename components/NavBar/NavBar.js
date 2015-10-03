@@ -163,7 +163,7 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#82d6c6',
-    marginTop: 64
+    marginTop:64
   },
 });
 

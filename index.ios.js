@@ -43,7 +43,6 @@ var xiaowa = React.createClass({
       <NavBar 
         firstRoute={firstRoute} 
         headerStyle={styles.header}
-        
       />
     );
   }

@@ -1,7 +1,8 @@
 'use strict';
 
 var React = require('react-native');
-
+var DB    = require('../../db');
+var DBEvents = require('react-native-db-models').DBEvents;
 var {
 	StyleSheet,
 	View,
@@ -12,7 +13,6 @@ var {
 
 var CheckIcon = React.createClass({
 	completeInput (){
-
 	},
 
 	render (){
