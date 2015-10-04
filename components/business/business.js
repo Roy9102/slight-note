@@ -170,7 +170,7 @@ var styles = StyleSheet.create({
 		height:72,
 		borderRadius:6,
 		padding:12,
-		margin:8,
+		marginBottom:16,
 		marginLeft:16,
 		marginRight:16,
 	},
@@ -187,7 +187,7 @@ var styles = StyleSheet.create({
 	},
 	line:{
 		left:-10,
-		top:45,
+		top:37,
 	},
 	ellipse:{
 		width:16,

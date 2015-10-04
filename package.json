@@ -8,7 +8,9 @@
   "dependencies": {
     "react-native": "^0.10.0",
     "react-native-camera": "^0.3.6",
-    "react-tween-state": "*",
-    "react-native-db-models":"*"
+    "react-native-db-models": "*",
+    "react-native-image-picker": "^0.7.1",
+    "react-native-refresher": "^0.1.1",
+    "react-tween-state": "*"
   }
 }

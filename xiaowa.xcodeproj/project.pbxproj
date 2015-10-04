@@ -24,6 +24,8 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		B0A41EF21BB67B1C00ED3BF2 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0A41EF11BB67B1C00ED3BF2 /* CoreImage.framework */; };
+		B0EA94DF1BC1065500D3DC3C /* UIImagePickerManager in Resources */ = {isa = PBXBuildFile; fileRef = B0EA94DE1BC1065500D3DC3C /* UIImagePickerManager */; settings = {ASSET_TAGS = (); }; };
+		B0EA94EE1BC10BB700D3DC3C /* UIImagePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EA94ED1BC10BB700D3DC3C /* UIImagePickerManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +131,8 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		B0A41EF11BB67B1C00ED3BF2 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		B0EA94DE1BC1065500D3DC3C /* UIImagePickerManager */ = {isa = PBXFileReference; lastKnownFileType = folder; name = UIImagePickerManager; path = "node_modules/react-native-image-picker/UIImagePickerManager"; sourceTree = "<group>"; };
+		B0EA94ED1BC10BB700D3DC3C /* UIImagePickerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = UIImagePickerManager.m; path = "node_modules/react-native-image-picker/UIImagePickerManager/UIImagePickerManager.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +270,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				B0EA94DE1BC1065500D3DC3C /* UIImagePickerManager */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
@@ -291,6 +296,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				B0EA94ED1BC10BB700D3DC3C /* UIImagePickerManager.m */,
 				B0A41EF11BB67B1C00ED3BF2 /* CoreImage.framework */,
 				13B07FAE1A68108700A75B9A /* xiaowa */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -514,6 +520,7 @@
 			files = (
 				008F07F31AC5B25A0029DE68 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				B0EA94DF1BC1065500D3DC3C /* UIImagePickerManager in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -533,6 +540,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0EA94EE1BC10BB700D3DC3C /* UIImagePickerManager.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);

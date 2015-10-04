@@ -7,6 +7,8 @@
 var React = require('react-native');
 var DB    = require('../db');
 var DBEvents = require('react-native-db-models').DBEvents;
+var SPRING_CONFIG = {tension: 1, friction: 3}; //Soft spring
+var ImagePicker = require('../components/icon/imagePicker');
 
 var {
   StyleSheet,
@@ -18,7 +20,8 @@ var {
   TouchableHighlight,
   TextInput,
   CameraRoll,
-  AsyncStorage
+  AsyncStorage,
+  Animated
 } = React;
 
 
@@ -91,12 +94,15 @@ var FuncIcon = React.createClass({
 var newPage = React.createClass({
     getInitialState (){
         return {
-            literation:''
+            literation:'',
+            pan : new Animated.ValueXY({
+                x:0,
+                y:192
+            }),
         }
     },
     fetchData (){
         var me = this;
-        
     },
 
     onChangeText (text){
@@ -104,42 +110,77 @@ var newPage = React.createClass({
             literation:text
         })
         DB.bussiness.add({
-            id:1,
-            title:'这是一个晴朗的在公司门口吃了...',
-            date : '上午 11：06   2014-08-08',
-            iconArray:['taxi','alarm','photo','record']
-        });   
+            date: new Date(),
+            iconArray: ["taxi","alarm","photo"],
+            title: "这是一个晴朗的在公司门口吃了...",
+        })
     },
 
-
+    getStyle (){
+        return [
+            {
+                transform: this.state.pan.getTranslateTransform(),
+            }
+        ]
+    },
 
     componentDidMount(){
         this.fetchData ()
     },
+
+    moreClick(){
+        Animated.spring(this.state.pan, {
+            ...SPRING_CONFIG,
+            toValue: {x: 0, y: 0}                        // return to start
+        }).start();
+    },
+
     render (){
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.inputbox}>
                     <TextInput ref="textinput" style={styles.textarea} placeholder="Here is you notice" value = {this.state.literation} onChangeText = {this.onChangeText} />
                 </ScrollView>
-                <View style={styles.ele_list}>
-                    <Image style={styles.icon} source={require('image!smiley')} />
-                    <Image style={styles.icon} source={require('image!photo')} />
-                    <Image style={styles.icon} source={require('image!camera')} />
-                    <Image style={[styles.icon,styles.right]} source={require('image!plus_gray')} />                
-                </View>
-                <View style={styles.itemType}>
-                    <View style={styles.typeRow}>
-                        <FuncIcon img='taxi_150' text='出行计划' />
-                        <FuncIcon img='alarm' text='闹钟提醒' />
-                        <FuncIcon img='record' text='语音录制' />
+                <Animated.View style={this.getStyle()}>
+                    <View style={styles.ele_list}>
+                        <TouchableHighlight
+                            underlayColor = 'rgba(0,0,0,0)'
+                            activeOpacity = "0.8"
+                        >
+                            <Image style={styles.icon} source={require('image!smiley')} />
+                        </TouchableHighlight>
+
+                        <ImagePicker />  
+
+                        <TouchableHighlight
+                            underlayColor = 'rgba(0,0,0,0)'
+                            activeOpacity = "0.8"
+                        >
+                            <Image style={styles.icon} source={require('image!camera')} />
+                        </TouchableHighlight>
+
+                        <TouchableHighlight
+                            style={styles.right}
+                            onPress={this.moreClick}
+                            underlayColor = 'rgba(0,0,0,0)'
+                            activeOpacity = "0.8"
+                        >
+                            <Image style={styles.icon} source={require('image!plus_gray')} />
+                        </TouchableHighlight>                
                     </View>
-                    <View style={styles.typeRow}>
-                        <FuncIcon img='package' text='行李清单' />
-                        <FuncIcon img='shopping_cart' text='购物清单' />
-                        <FuncIcon img='video' text='视频录制' />
+                    <View style={styles.itemType}>
+                        <View style={styles.typeRow}>
+                            <FuncIcon img='taxi_150' text='出行计划' />
+                            <FuncIcon img='alarm' text='闹钟提醒' />
+                            <FuncIcon img='record' text='语音录制' />
+                        </View>
+                        <View style={styles.typeRow}>
+                            <FuncIcon img='package' text='行李清单' />
+                            <FuncIcon img='shopping_cart' text='购物清单' />
+                            <FuncIcon img='video' text='视频录制' />
+                        </View>
                     </View>
-                </View>
+                </Animated.View>
             </View>
         )
     }
@@ -180,20 +221,17 @@ var styles = StyleSheet.create({
   },
   itemType:{
     backgroundColor:'#f4f5f5',
-    paddingTop:24,
-    translateX:100000
   },
   typeRow:{
-    flex:1,
     flexDirection:'row',
     alignItems:'center',
-    justifyContent:'space-around'
+    justifyContent:'space-around',
+    margin:16
   },
   moreList:{
     width:64,
     height:64,
     alignItems:'center',
-    marginBottom:24,
     justifyContent:'space-around',
   },
   icon_text:{

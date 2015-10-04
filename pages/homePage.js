@@ -16,6 +16,11 @@ var {
 	TouchableHighlight
 } = React;
 
+var {
+  RefresherListView,
+  LoadingActivityIndicatorIOS
+} = require('react-native-refresher');
+
 
 var Homepage = React.createClass({
 	getInitialState: function() {
@@ -27,18 +32,17 @@ var Homepage = React.createClass({
 
 	fetchData(){
 		var me = this;
-		 DB.bussiness.get_all(function(result){
-            console.log(result);
+		DB.bussiness.get_all(function(result){
             me.setState({
-            	dataSource: me.state.dataSource.cloneWithRows(me.OBJtoARRAY(result.rows)),
+            	dataSource: me.state.dataSource.cloneWithRows(me.ObjToArray(result.rows)),
             })
         })
 	},
 
-	OBJtoARRAY (obj){
+	ObjToArray (obj){
 		var arr = [];
 		for(var key in obj){
-			arr.push(obj[key]);
+			arr[key] = obj[key];
 		}
 		return arr;
 	},
@@ -48,15 +52,13 @@ var Homepage = React.createClass({
 	},
 
   	render_list : function(rowData){
-  		console.log(rowData);
       	return (
 	        <Business 
 	        	{...rowData}
 	        	literation = {rowData.title}
 	        	date = {rowData.date}
 	          	iconArray = {rowData.iconArray}
-	          	goToDetail = {this.props.toRoute}
-	        />
+	          	goToDetail = {this.props.toRoute}/>
      	)
   	},
 
@@ -64,13 +66,14 @@ var Homepage = React.createClass({
   	render: function() {
 	    return (
 		    <View style={styles.container}>
-		        
-		          <ListView
-		            style={styles.listStyle}
-		            dataSource={this.state.dataSource}
-		            renderRow={this.render_list}
-		          />
-		        
+	          <RefresherListView
+	          	threshold = {30}
+	          	style = {styles.listStyle}
+	          	onRefresh = {this.fetchData}
+      			indicator = {<LoadingActivityIndicatorIOS />}
+	            dataSource = {this.state.dataSource}
+	            renderRow = {this.render_list}
+	          />		        
 		    </View>
 	    );
 	  }
@@ -81,15 +84,9 @@ var styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fcf6dc',
   },
-  scrollview:{
-  	marginTop:-32,
-  	backgroundColor:'green',
+  listStyle:{
   	flex:1,
   },
-  listStyle:{
-  	flexDirection:'column',
-  	backgroundColor:'red',
-  }
 });
 
 
