@@ -13,6 +13,7 @@ var {
 
 var CheckIcon = React.createClass({
 	completeInput (){
+		console.log(this.props.toRoute);
 	},
 
 	render (){
@@ -50,10 +51,11 @@ var PlaneIcon = React.createClass({
 
 
 var CheckAndPlane = React.createClass({
+
 	render (){
 		return (
 			<View style = {style.iconContainer}>
-				<CheckIcon />
+				<CheckIcon  toRoute={this.props.toRoute} />
 				<PlaneIcon />
 			</View>
 		)

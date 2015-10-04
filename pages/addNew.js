@@ -109,11 +109,11 @@ var newPage = React.createClass({
         this.setState({
             literation:text
         })
-        DB.bussiness.add({
-            date: new Date(),
-            iconArray: ["taxi","alarm","photo"],
-            title: "这是一个晴朗的在公司门口吃了...",
-        })
+        // DB.bussiness.add({
+        //     date: new Date(),
+        //     iconArray: ["taxi","alarm","photo"],
+        //     title: "这是一个晴朗的在公司门口吃了...",
+        // })
     },
 
     getStyle (){
