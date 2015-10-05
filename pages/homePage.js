@@ -33,10 +33,12 @@ var Homepage = React.createClass({
 	fetchData(){
 		var me = this;
 		DB.bussiness.get_all(function(result){
+            console.log(result);
             me.setState({
             	dataSource: me.state.dataSource.cloneWithRows(me.ObjToArray(result.rows)),
             })
         })
+  		
 	},
 
 	ObjToArray (obj){
@@ -48,7 +50,7 @@ var Homepage = React.createClass({
 	},
 
 	componentDidMount (){
-		this.fetchData();
+		this.fetchData()
 	},
 
   	render_list : function(rowData){
@@ -58,7 +60,9 @@ var Homepage = React.createClass({
 	        	literation = {rowData.title}
 	        	date = {rowData.date}
 	          	iconArray = {rowData.iconArray}
-	          	goToDetail = {this.props.toRoute}/>
+	          	goToDetail = {this.props.toRoute}
+	          	reFresh = {this.fetchData}
+	        />
      	)
   	},
 

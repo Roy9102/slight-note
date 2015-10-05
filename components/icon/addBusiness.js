@@ -27,7 +27,7 @@ var CreateOne = React.createClass({
 			<TouchableHighlight 
 				style={style.container}
 				underlayColor = 'transparent'
-				activeOpacity = "0.8"
+				activeOpacity = {0.8}
 				onPress = {this.addOne}
 			>
 				<Image style={style.icon} source={require('image!add_icon')}/>
@@ -38,13 +38,19 @@ var CreateOne = React.createClass({
 
 var style = StyleSheet.create({
 	container:{
-		flexDirection:'row',
+		borderRadius:16,
+	    backgroundColor:'#6fc6c0',
+	    width:32,
+	    height:32,
+	    justifyContent:'space-around',
+	    alignItems:'center',
+	    right:10,
+	    top:5,
 	},
 	icon:{
-		width:21,
-		height:21,
-		marginTop: 4,
-    	marginRight: 15
+		width:18,
+		height:18,
+    	resizeMode: Image.resizeMode.contain,
 	},
 })
 

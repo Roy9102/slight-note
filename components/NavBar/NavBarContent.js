@@ -31,7 +31,7 @@ var NavBarContent = React.createClass({
       setTimeout(() => {
         this.tweenState('opacity', {
           easing: tweenState.easingTypes.easeInOutQuad,
-          duration: 200,
+          duration: 33,
           endValue: 1
         });
       }, 0);
@@ -88,7 +88,7 @@ var NavBarContent = React.createClass({
 
     if (this.props.route.rightCorner || this.props.rightCorner) {
       var RightCorner = this.props.route.rightCorner || this.props.rightCorner;
-      rightCornerContent = <RightCorner toRoute={this.goForward} customAction={this.customAction} />;
+      rightCornerContent = <RightCorner gobackHome={this.goBack} toRoute={this.goForward} customAction={this.customAction} />;
     }
 
     rightCorner = (

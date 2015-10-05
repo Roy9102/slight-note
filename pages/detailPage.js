@@ -17,7 +17,7 @@ var ItemDetails = React.createClass({
   render :function() {
     return (
       <View style={styles.detailContainer}>
-        <Text>fdsafdsa</Text>
+        <Text>{this.props.data.title}</Text>
       </View>
     )
   }

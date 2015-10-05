@@ -7,6 +7,8 @@
 
 var React = require('react-native');
 var detailPage = require('../../pages/detailPage');
+var DB    = require('../../db');
+var DBEvents = require('react-native-db-models').DBEvents;
 var SPRING_CONFIG = {tension: 6, friction: 2}; //Soft spring
 
 
@@ -125,6 +127,10 @@ var Business = React.createClass({
 		return res
 	},
 
+	deleteItem (){
+		DB.bussiness.remove_id(this.props._id,this.props.reFresh);
+	},
+
 	render () {
 		var {
 			literation,
@@ -133,10 +139,16 @@ var Business = React.createClass({
 		} = this.props;
 		return (
 			<View style={styles.itemContainer} >
-				<View style={styles.deleteIcon}>
-					<Image style={styles.trash} source={require('image!trash')} />
-					<Text style={styles.trashText}>删除</Text>
-				</View>
+				<TouchableHighlight
+					underlayColor = 'transparent'
+					activeOpacity = {0.8}
+					onPress={this.deleteItem}
+				>
+					<View style={styles.deleteIcon}>
+						<Image style={styles.trash} source={require('image!trash')} />
+						<Text style={styles.trashText}>删除</Text>
+					</View>
+				</TouchableHighlight>
 				<Animated.View style={this.getStyle()}
 					onStartShouldSetResponder={this.didStartDrag}
     				onResponderRelease={this.didMoveFinger}

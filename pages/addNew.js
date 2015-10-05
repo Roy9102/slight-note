@@ -26,10 +26,7 @@ var {
 
 
 var FuncIcon = React.createClass({
-    onPress (){
-        CameraRoll.saveImageWithTag()
-    },
-
+   
     render_img (img){
         var res = null;
         switch(img){
@@ -77,7 +74,7 @@ var FuncIcon = React.createClass({
              <TouchableHighlight
                 style={styles.moreList}
                 underlayColor = 'rgba(0,0,0,0)'
-                activeOpacity = "0.8"
+                activeOpacity = {0.8}
             >
                 <View>
                     <View style={styles.iconView}>
@@ -112,9 +109,20 @@ var newPage = React.createClass({
         // DB.bussiness.add({
         //     date: new Date(),
         //     iconArray: ["taxi","alarm","photo"],
-        //     title: "这是一个晴朗的在公司门口吃了...",
+        //     title: 'FDSAFDSAFDSAFDSAFDSAFDSA'
         // })
+        
     },
+
+    submitEdit(){
+        var text = this.state.literation;
+        DB.bussiness.add({
+            date: new Date(),
+            iconArray: ["taxi","alarm","photo"],
+            title: text
+        })
+    },
+
 
     getStyle (){
         return [
@@ -125,7 +133,7 @@ var newPage = React.createClass({
     },
 
     componentDidMount(){
-        this.fetchData ()
+        this.fetchData();
     },
 
     moreClick(){
@@ -134,53 +142,20 @@ var newPage = React.createClass({
             toValue: {x: 0, y: 0}                        // return to start
         }).start();
     },
-
     render (){
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.inputbox}>
-                    <TextInput ref="textinput" style={styles.textarea} placeholder="Here is you notice" value = {this.state.literation} onChangeText = {this.onChangeText} />
+                    <TextInput ref="textinput" 
+                        style={styles.textarea} 
+                        placeholder="Here is you notice" 
+                        value = {this.state.literation} 
+                        onChangeText = {this.onChangeText}
+                        multiline={true}
+                        onBlur = {this.submitEdit}
+                    />
                 </ScrollView>
-                <Animated.View style={this.getStyle()}>
-                    <View style={styles.ele_list}>
-                        <TouchableHighlight
-                            underlayColor = 'rgba(0,0,0,0)'
-                            activeOpacity = "0.8"
-                        >
-                            <Image style={styles.icon} source={require('image!smiley')} />
-                        </TouchableHighlight>
-
-                        <ImagePicker />  
-
-                        <TouchableHighlight
-                            underlayColor = 'rgba(0,0,0,0)'
-                            activeOpacity = "0.8"
-                        >
-                            <Image style={styles.icon} source={require('image!camera')} />
-                        </TouchableHighlight>
-
-                        <TouchableHighlight
-                            style={styles.right}
-                            onPress={this.moreClick}
-                            underlayColor = 'rgba(0,0,0,0)'
-                            activeOpacity = "0.8"
-                        >
-                            <Image style={styles.icon} source={require('image!plus_gray')} />
-                        </TouchableHighlight>                
-                    </View>
-                    <View style={styles.itemType}>
-                        <View style={styles.typeRow}>
-                            <FuncIcon img='taxi_150' text='出行计划' />
-                            <FuncIcon img='alarm' text='闹钟提醒' />
-                            <FuncIcon img='record' text='语音录制' />
-                        </View>
-                        <View style={styles.typeRow}>
-                            <FuncIcon img='package' text='行李清单' />
-                            <FuncIcon img='shopping_cart' text='购物清单' />
-                            <FuncIcon img='video' text='视频录制' />
-                        </View>
-                    </View>
-                </Animated.View>
+                
             </View>
         )
     }
@@ -189,12 +164,14 @@ var newPage = React.createClass({
 var styles = StyleSheet.create({
   container:{
     backgroundColor:'#fcfaf0',
-    color:'#75675a',
     flex:1
   },
   inputbox:{
-    height:100,
-    backgroundColor:'#fcfaf0'
+    flex:1,
+  },
+  textarea:{
+    height:200,
+    color:'#75675a',
   },
   ele_list:{
     flexDirection:'row',
@@ -212,12 +189,6 @@ var styles = StyleSheet.create({
     alignSelf:'flex-end',
     right:20,
     top:-6
-  },
-  textarea:{
-    flex:1,
-    height:100,
-    color:'#75675a',
-    backgroundColor:'#fcfaf0'
   },
   itemType:{
     backgroundColor:'#f4f5f5',
@@ -250,7 +221,41 @@ var styles = StyleSheet.create({
     height:36,
   }
 })
+ 
+// <Animated.View style={this.getStyle()}>
+//                     <View style={styles.ele_list}>
+//                         <TouchableHighlight
+//                             underlayColor = 'rgba(0,0,0,0)'
+//                             activeOpacity = "0.8"
+//                         >
+//                             <Image style={styles.icon} source={require('image!smiley')} />
+//                         </TouchableHighlight>
 
+//                         <ImagePicker  ref = "photoPicker" />  
+
+                
+//                         <TouchableHighlight
+//                             style={styles.right}
+//                             onPress={this.moreClick}
+//                             underlayColor = 'rgba(0,0,0,0)'
+//                             activeOpacity = "0.8"
+//                         >
+//                             <Image style={styles.icon} source={require('image!plus_gray')} />
+//                         </TouchableHighlight>                
+//                     </View>
+//                     <View style={styles.itemType}>
+//                         <View style={styles.typeRow}>
+//                             <FuncIcon img='taxi_150' text='出行计划' />
+//                             <FuncIcon img='alarm' text='闹钟提醒' />
+//                             <FuncIcon img='record' text='语音录制' />
+//                         </View>
+//                         <View style={styles.typeRow}>
+//                             <FuncIcon img='package' text='行李清单' />
+//                             <FuncIcon img='shopping_cart' text='购物清单' />
+//                             <FuncIcon img='video' text='视频录制' />
+//                         </View>
+//                     </View>
+//                 </Animated.View>
 
 
 

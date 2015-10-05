@@ -65,6 +65,7 @@ var NavBar = React.createClass({
     };
 
     var customAction = function(opts) {
+      console.log(opts);
       this.customAction(opts);
     }.bind(this);
 

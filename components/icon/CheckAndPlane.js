@@ -1,8 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-var DB    = require('../../db');
-var DBEvents = require('react-native-db-models').DBEvents;
+
 var {
 	StyleSheet,
 	View,
@@ -13,15 +12,15 @@ var {
 
 var CheckIcon = React.createClass({
 	completeInput (){
-		console.log(this.props.toRoute);
+		this.props.gohome();
 	},
 
 	render (){
 		return (
 			<TouchableHighlight
 				style={style.check}
-				underlayColor = 'transparent'
-				activeOpacity = "0.8"
+				underlayColor = '#6fc6c0'
+				activeOpacity = {0.8}
 				onPress = {this.completeInput}
 			>
 				<Image style = {style.icon} source = {require('image!check')} />
@@ -39,8 +38,8 @@ var PlaneIcon = React.createClass({
 		return (
 			<TouchableHighlight
 				style={style.plane}
-				underlayColor = 'transparent'
-				activeOpacity = "0.8"
+				underlayColor = '#6fc6c0'
+				activeOpacity = {0.8}
 				onPress = {this.completeInput}
 			>
 				<Image style = {style.icon} source = {require('image!plane')} />
@@ -51,11 +50,10 @@ var PlaneIcon = React.createClass({
 
 
 var CheckAndPlane = React.createClass({
-
 	render (){
 		return (
 			<View style = {style.iconContainer}>
-				<CheckIcon  toRoute={this.props.toRoute} />
+				<CheckIcon  gohome={this.props.gobackHome} />
 				<PlaneIcon />
 			</View>
 		)
@@ -66,15 +64,34 @@ var CheckAndPlane = React.createClass({
 var style = StyleSheet.create({
 	iconContainer : {
 		flexDirection:'row',
-		right:15,
+		right:12,
 		top:5,
 		justifyContent:'space-around',
 		alignItems:'center',
 		width:64
 	},
+	check:{
+		backgroundColor:'#6fc6c0',
+		borderRadius:16,
+		width:32,
+		height:32,
+		justifyContent:'space-around',
+		alignItems:'center',
+		marginRight:24
+	},
+	plane:{
+		backgroundColor:'#6fc6c0',
+		borderRadius:16,
+		width:32,
+		height:32,
+		justifyContent:'space-around',
+		alignItems:'center',
+	},
 	icon : {
-		width:24,
-		height:21,
+		width:18,
+		height:15,
+		resizeMode: Image.resizeMode.contain,
+		backgroundColor:'transparent',
 	}
 
 })
