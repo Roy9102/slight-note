@@ -33,7 +33,7 @@ var Homepage = React.createClass({
 	fetchData(){
 		var me = this;
 		DB.bussiness.get_all(function(result){
-            console.log(result);
+            // console.log(result);
             me.setState({
             	dataSource: me.state.dataSource.cloneWithRows(me.ObjToArray(result.rows)),
             })
@@ -53,7 +53,12 @@ var Homepage = React.createClass({
 		this.fetchData()
 	},
 
+	onPress (){
+		console.log(this)
+	},
+
   	render_list : function(rowData){
+  		var ref = 'item_' + rowData._id;
       	return (
 	        <Business 
 	        	{...rowData}
@@ -61,24 +66,28 @@ var Homepage = React.createClass({
 	        	date = {rowData.date}
 	          	iconArray = {rowData.iconArray}
 	          	goToDetail = {this.props.toRoute}
-	          	reFresh = {this.fetchData}
-	        />
+	          	reFresh = {this.fetchData}/>
      	)
   	},
 
 	
   	render: function() {
 	    return (
-		    <View style={styles.container}>
-	          <RefresherListView
-	          	threshold = {30}
-	          	style = {styles.listStyle}
-	          	onRefresh = {this.fetchData}
-      			indicator = {<LoadingActivityIndicatorIOS />}
-	            dataSource = {this.state.dataSource}
-	            renderRow = {this.render_list}
-	          />		        
-		    </View>
+		    <TouchableHighlight 
+			    style={styles.container}
+				underlayColor = "#fcf6dc"
+				activeOpacity = {1}
+				onPress = {this.onPress}
+			>
+	        	<RefresherListView
+		          	threshold = {30}
+		          	style = {styles.listStyle}
+		          	onRefresh = {this.fetchData}
+	      			indicator = {<LoadingActivityIndicatorIOS />}
+		            dataSource = {this.state.dataSource}
+		            renderRow = {this.render_list}
+		        />
+		    </TouchableHighlight>
 	    );
 	  }
 });

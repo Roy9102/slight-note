@@ -9,6 +9,8 @@ var DB    = require('../db');
 var DBEvents = require('react-native-db-models').DBEvents;
 var SPRING_CONFIG = {tension: 1, friction: 3}; //Soft spring
 var ImagePicker = require('../components/icon/imagePicker');
+var MarkAddress = require('../components/mark_tip/MarkAddress');
+
 
 var {
   StyleSheet,
@@ -23,6 +25,8 @@ var {
   AsyncStorage,
   Animated
 } = React;
+
+
 
 
 var FuncIcon = React.createClass({
@@ -98,28 +102,21 @@ var newPage = React.createClass({
             }),
         }
     },
-    fetchData (){
-        var me = this;
-    },
 
     onChangeText (text){
         this.setState({
             literation:text
         })
-        // DB.bussiness.add({
-        //     date: new Date(),
-        //     iconArray: ["taxi","alarm","photo"],
-        //     title: 'FDSAFDSAFDSAFDSAFDSAFDSA'
-        // })
         
     },
 
     submitEdit(){
         var text = this.state.literation;
         DB.bussiness.add({
-            date: new Date(),
+            date: this.props.data.date,
             iconArray: ["taxi","alarm","photo"],
-            title: text
+            title: text,
+            address:this.refs.address.state.address,
         })
     },
 
@@ -130,10 +127,6 @@ var newPage = React.createClass({
                 transform: this.state.pan.getTranslateTransform(),
             }
         ]
-    },
-
-    componentDidMount(){
-        this.fetchData();
     },
 
     moreClick(){
@@ -152,10 +145,46 @@ var newPage = React.createClass({
                         value = {this.state.literation} 
                         onChangeText = {this.onChangeText}
                         multiline={true}
-                        onBlur = {this.submitEdit}
+                        onEndEditing = {this.submitEdit}
                     />
                 </ScrollView>
+                <Text style={styles.date}>{this.props.data.date}</Text>
+                <MarkAddress ref="address" />
+
+                <Animated.View style={this.getStyle()}>
+                    <View style={styles.ele_list}>
+                        <TouchableHighlight
+                            underlayColor = 'rgba(0,0,0,0)'
+                            activeOpacity = "0.8"
+                        >
+                            <Image style={styles.icon} source={require('image!smiley')} />
+                        </TouchableHighlight>
+
+                        <ImagePicker  ref = "photoPicker" />  
+
                 
+                        <TouchableHighlight
+                            style={styles.right}
+                            onPress={this.moreClick}
+                            underlayColor = 'rgba(0,0,0,0)'
+                            activeOpacity = "0.8"
+                        >
+                            <Image style={styles.icon} source={require('image!plus_gray')} />
+                        </TouchableHighlight>                
+                    </View>
+                    <View style={styles.itemType}>
+                        <View style={styles.typeRow}>
+                            <FuncIcon img='taxi_150' text='出行计划' />
+                            <FuncIcon img='alarm' text='闹钟提醒' />
+                            <FuncIcon img='record' text='语音录制' />
+                        </View>
+                        <View style={styles.typeRow}>
+                            <FuncIcon img='package' text='行李清单' />
+                            <FuncIcon img='shopping_cart' text='购物清单' />
+                            <FuncIcon img='video' text='视频录制' />
+                        </View>
+                    </View>
+                </Animated.View>
             </View>
         )
     }
@@ -219,43 +248,17 @@ var styles = StyleSheet.create({
     margin:10,
     width:36,
     height:36,
+  }, 
+  date:{
+    color:"#75675a",
+    fontSize:13,
+    alignSelf:'flex-end',
+    marginRight:12,
+    marginBottom:6,
   }
 })
  
-// <Animated.View style={this.getStyle()}>
-//                     <View style={styles.ele_list}>
-//                         <TouchableHighlight
-//                             underlayColor = 'rgba(0,0,0,0)'
-//                             activeOpacity = "0.8"
-//                         >
-//                             <Image style={styles.icon} source={require('image!smiley')} />
-//                         </TouchableHighlight>
 
-//                         <ImagePicker  ref = "photoPicker" />  
-
-                
-//                         <TouchableHighlight
-//                             style={styles.right}
-//                             onPress={this.moreClick}
-//                             underlayColor = 'rgba(0,0,0,0)'
-//                             activeOpacity = "0.8"
-//                         >
-//                             <Image style={styles.icon} source={require('image!plus_gray')} />
-//                         </TouchableHighlight>                
-//                     </View>
-//                     <View style={styles.itemType}>
-//                         <View style={styles.typeRow}>
-//                             <FuncIcon img='taxi_150' text='出行计划' />
-//                             <FuncIcon img='alarm' text='闹钟提醒' />
-//                             <FuncIcon img='record' text='语音录制' />
-//                         </View>
-//                         <View style={styles.typeRow}>
-//                             <FuncIcon img='package' text='行李清单' />
-//                             <FuncIcon img='shopping_cart' text='购物清单' />
-//                             <FuncIcon img='video' text='视频录制' />
-//                         </View>
-//                     </View>
-//                 </Animated.View>
 
 
 

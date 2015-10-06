@@ -149,7 +149,7 @@ var Business = React.createClass({
 						<Text style={styles.trashText}>删除</Text>
 					</View>
 				</TouchableHighlight>
-				<Animated.View style={this.getStyle()}
+				<Animated.View ref={'item_'+this.props._id} style={this.getStyle()}
 					onStartShouldSetResponder={this.didStartDrag}
     				onResponderRelease={this.didMoveFinger}
 				>
@@ -212,7 +212,7 @@ var styles = StyleSheet.create({
 		flexDirection:'row',
 		padding:8,
 		left:21,
-		top:34
+		top:24
 	},
 	trash:{
 		height:14,
