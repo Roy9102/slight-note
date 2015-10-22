@@ -64,6 +64,7 @@ var ImagePicker = React.createClass({
 				  		source :source
 				  	})
 				}
+				this.props.addImage(source);
 			}
 		});
 	},

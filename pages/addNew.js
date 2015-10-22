@@ -12,6 +12,7 @@ var ImagePicker = require('../components/icon/imagePicker');
 var MarkAddress = require('../components/mark_tip/MarkAddress');
 
 
+
 var {
   StyleSheet,
   Text,
@@ -23,7 +24,8 @@ var {
   TextInput,
   CameraRoll,
   AsyncStorage,
-  Animated
+  Animated,
+  LayoutAnimation
 } = React;
 
 
@@ -75,7 +77,7 @@ var FuncIcon = React.createClass({
 
     render (){
         return(
-             <TouchableHighlight
+            <TouchableHighlight
                 style={styles.moreList}
                 underlayColor = 'rgba(0,0,0,0)'
                 activeOpacity = {0.8}
@@ -95,13 +97,19 @@ var FuncIcon = React.createClass({
 var newPage = React.createClass({
     getInitialState (){
         return {
-            literation:'',
-            pan : new Animated.ValueXY({
-                x:0,
-                y:192
-            }),
+            literation : '',
+            h:60,
+            imageUri : Image.source
         }
     },
+
+    addImage (source){
+        this.setState({
+            imageUri:source
+        });
+        console.log(this.refs.image_alt);
+    },
+
 
     onChangeText (text){
         this.setState({
@@ -124,16 +132,23 @@ var newPage = React.createClass({
     getStyle (){
         return [
             {
-                transform: this.state.pan.getTranslateTransform(),
+                height: this.state.h
             }
         ]
     },
 
-    moreClick(){
-        Animated.spring(this.state.pan, {
-            ...SPRING_CONFIG,
-            toValue: {x: 0, y: 0}                        // return to start
-        }).start();
+    componentDidMount(){
+        LayoutAnimation.spring();
+    },
+
+    ToggleClick(){
+        var height = this.state.h === 256 ? 60 : 256;
+        LayoutAnimation.spring();
+        this.setState({h: height})
+        // Animated.spring(this.state.pan, {
+        //     ...SPRING_CONFIG,
+        //     toValue: {x: 0, y: 0}                        // return to start
+        // }).start();
     },
     render (){
         return (
@@ -147,9 +162,13 @@ var newPage = React.createClass({
                         multiline={true}
                         onEndEditing = {this.submitEdit}
                     />
+                    <View style={styles.photoPie}>
+                        <Image style={styles.photo_set} ref="photo_set" source={this.state.imageUri}   />
+                    </View>
+
                 </ScrollView>
                 <Text style={styles.date}>{this.props.data.date}</Text>
-                <MarkAddress ref="address" />
+                <MarkAddress ref="address" />              
 
                 <Animated.View style={this.getStyle()}>
                     <View style={styles.ele_list}>
@@ -160,12 +179,11 @@ var newPage = React.createClass({
                             <Image style={styles.icon} source={require('image!smiley')} />
                         </TouchableHighlight>
 
-                        <ImagePicker  ref = "photoPicker" />  
+                        <ImagePicker addImage = {this.addImage} ref = "photoPicker" />  
 
-                
                         <TouchableHighlight
                             style={styles.right}
-                            onPress={this.moreClick}
+                            onPress={this.ToggleClick}
                             underlayColor = 'rgba(0,0,0,0)'
                             activeOpacity = "0.8"
                         >
@@ -191,70 +209,80 @@ var newPage = React.createClass({
 });
 
 var styles = StyleSheet.create({
-  container:{
-    backgroundColor:'#fcfaf0',
-    flex:1
+  container: {
+    backgroundColor: '#fcfaf0',
+    flex:            1
   },
   inputbox:{
-    flex:1,
+    flex: 1,
   },
   textarea:{
-    height:200,
-    color:'#75675a',
+    height: 200,
+    color:  '#75675a',
+    backgroundColor:'green'
   },
   ele_list:{
-    flexDirection:'row',
-    height:60,
-    alignItems:'center',
-    backgroundColor:'#fff'
+    flexDirection:   'row',
+    height:          60,
+    alignItems:      'center',
+    backgroundColor: '#fff'
   },
   icon:{
-    width:30,
-    height:30,
-    margin:20
+    width:  30,
+    height: 30,
+    margin: 20
   },
   right:{
-    position:'absolute',
-    alignSelf:'flex-end',
-    right:20,
-    top:-6
+    position:  'absolute',
+    alignSelf: 'flex-end',
+    right:     20,
+    top:       -6
   },
   itemType:{
-    backgroundColor:'#f4f5f5',
+    backgroundColor: '#f4f5f5',
   },
   typeRow:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-around',
-    margin:16
+    flexDirection:  'row',
+    alignItems:     'center',
+    justifyContent: 'space-around',
+    margin:         16
   },
   moreList:{
-    width:64,
-    height:64,
-    alignItems:'center',
-    justifyContent:'space-around',
+    width:          64,
+    height:         64,
+    alignItems:     'center',
+    justifyContent: 'space-around',
   },
   icon_text:{
-    color:'#4c4c4c',
-    fontSize:12,
-    margin:4,
-    textAlign:'center'
+    color:     '#4c4c4c',
+    fontSize:  12,
+    margin:    4,
+    textAlign: 'center'
   },
   iconView:{
-    backgroundColor:'#Fff',
-    borderRadius:5
+    backgroundColor: '#Fff',
+    borderRadius:    5
   },
   typeIcon:{
-    margin:10,
-    width:36,
-    height:36,
+    margin: 10,
+    width:  36,
+    height: 36,
   }, 
+  photoPie:{
+    flex:            1,
+    backgroundColor: 'green'
+  },
+  photo_set:{
+    margin:12,
+    flex:1,
+    resizeMode: Image.resizeMode.contain,
+  },
   date:{
-    color:"#75675a",
-    fontSize:13,
-    alignSelf:'flex-end',
-    marginRight:12,
-    marginBottom:6,
+    color:        "#75675a",
+    fontSize:     13,
+    alignSelf:    'flex-end',
+    marginRight:  12,
+    marginBottom: 6,
   }
 })
  
