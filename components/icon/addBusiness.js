@@ -4,6 +4,7 @@ var React = require('react-native');
 var addNew = require('../../pages/addNew');
 var CheckAndPlane = require('./CheckAndPlane');
 
+
 var {
 	StyleSheet,
 	View,
@@ -43,7 +44,7 @@ var CreateOne = React.createClass({
 			component:addNew,
 			rightCorner:CheckAndPlane,
 			data:{
-				date:getFormatDate('yyyy年MM月dd日 HH:mm')
+				date:getFormatDate('yyyy年MM月dd日 HH:mm'),
 			}
 		})
 	},

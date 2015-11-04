@@ -8,7 +8,7 @@ var React = require('react-native');
 
 var NavBar = require('./components/NavBar/NavBar');
 var Business = require('./components/business/business');
-
+var RCTDeviceEventEmitter = require('RCTDeviceEventEmitter');
 var XiaoWaBtn = require('./components/XiaoWaIcon/xiaowa');
 var searchAndEdit = require('./components/searchAndEdit/searchAndEdit')
 var addBussiness = require('./components/icon/addBusiness');
@@ -40,7 +40,7 @@ var xiaowa = React.createClass({
   },
   render: function() {
     return (
-      <NavBar 
+      <NavBar
         firstRoute={firstRoute} 
         headerStyle={styles.header}
       />

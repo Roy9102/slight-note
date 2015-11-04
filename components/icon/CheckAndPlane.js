@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+// var RCTDeviceEventEmitter = require('RCTDeviceEventEmitter');
 
 var {
 	StyleSheet,
@@ -12,7 +13,10 @@ var {
 
 var CheckIcon = React.createClass({
 	completeInput (){
-		this.props.gohome();
+
+	},
+	componentDidMount(){
+		
 	},
 
 	render (){
@@ -21,7 +25,7 @@ var CheckIcon = React.createClass({
 				style={style.check}
 				underlayColor = '#6fc6c0'
 				activeOpacity = {0.8}
-				onPress = {this.completeInput}
+				onPress = {this.props.customAction}
 			>
 				<Image style = {style.icon} source = {require('image!check')} />
 			</TouchableHighlight>
@@ -33,7 +37,6 @@ var PlaneIcon = React.createClass({
 	completeInput (){
 
 	},
-
 	render (){
 		return (
 			<TouchableHighlight
@@ -50,10 +53,11 @@ var PlaneIcon = React.createClass({
 
 
 var CheckAndPlane = React.createClass({
+
 	render (){
 		return (
 			<View style = {style.iconContainer}>
-				<CheckIcon  gohome={this.props.gobackHome} />
+				<CheckIcon />
 				<PlaneIcon />
 			</View>
 		)

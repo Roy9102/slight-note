@@ -18,8 +18,8 @@ var NavButton = React.createClass({
   },
 
   render() {
-    var backButton;
 
+    var backButton;
     if (this.props.backButtonComponent) {
       var BackButton = this.props.backButtonComponent;
       backButton = <View><BackButton /></View>

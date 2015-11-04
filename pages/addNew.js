@@ -33,6 +33,8 @@ var {
 
 var FuncIcon = React.createClass({
    
+    componentDidMount(){
+    },
     render_img (img){
         var res = null;
         switch(img){
@@ -97,19 +99,44 @@ var FuncIcon = React.createClass({
 var newPage = React.createClass({
     getInitialState (){
         return {
-            literation : '',
-            h:60,
-            imageUri : Image.source
+            literation : 'hello',
+            func_area_height:60,
+            ImageCard_height:0,
+            photos : [],
+            Images:[],
+            iconArray:[]
         }
     },
 
     addImage (source){
-        this.setState({
-            imageUri:source
-        });
-        console.log(this.refs.image_alt);
-    },
+        var arr = this.state.Images;
+        var photos = this.state.photos;
+        photos.push(source);
+        arr.push(
+            <Image style={styles.photo_set} source={source} />
+        )
+        if (this.state.ImageCard_height){
 
+            this.setState({
+                Images:arr,
+                photos:photos
+            });
+        }else{
+            LayoutAnimation.spring();
+            this.setState({
+                Images:arr,
+                photos:photos,
+                ImageCard_height:150
+            });
+        }
+        if (!this.state.iconArray.find((n) => {return n === 'photo'})){
+            let iArr = this.state.iconArray;
+            iArr.push('photo');
+            this.setState({
+                iconArray:iArr
+            })
+        }
+    },
 
     onChangeText (text){
         this.setState({
@@ -122,7 +149,8 @@ var newPage = React.createClass({
         var text = this.state.literation;
         DB.bussiness.add({
             date: this.props.data.date,
-            iconArray: ["taxi","alarm","photo"],
+            iconArray: this.state.iconArray,
+            photos:this.state.photos,
             title: text,
             address:this.refs.address.state.address,
         })
@@ -132,19 +160,27 @@ var newPage = React.createClass({
     getStyle (){
         return [
             {
-                height: this.state.h
+                height: this.state.func_area_height
+            }
+        ]
+    },
+
+    getImageCardStyle(){
+        return [
+            styles.photoPie,
+            {
+                height: this.state.ImageCard_height
             }
         ]
     },
 
     componentDidMount(){
-        LayoutAnimation.spring();
     },
 
     ToggleClick(){
         var height = this.state.h === 256 ? 60 : 256;
         LayoutAnimation.spring();
-        this.setState({h: height})
+        this.setState({func_area_height: height})
         // Animated.spring(this.state.pan, {
         //     ...SPRING_CONFIG,
         //     toValue: {x: 0, y: 0}                        // return to start
@@ -162,9 +198,9 @@ var newPage = React.createClass({
                         multiline={true}
                         onEndEditing = {this.submitEdit}
                     />
-                    <View style={styles.photoPie}>
-                        <Image style={styles.photo_set} ref="photo_set" source={this.state.imageUri}   />
-                    </View>
+                    <Animated.View style={this.getImageCardStyle()}>
+                       {this.state.Images}
+                    </Animated.View>
 
                 </ScrollView>
                 <Text style={styles.date}>{this.props.data.date}</Text>
@@ -214,12 +250,12 @@ var styles = StyleSheet.create({
     flex:            1
   },
   inputbox:{
-    flex: 1,
+    flex:1,
   },
   textarea:{
-    height: 200,
     color:  '#75675a',
-    backgroundColor:'green'
+    height:80,
+    fontSize:16,
   },
   ele_list:{
     flexDirection:   'row',
@@ -269,11 +305,14 @@ var styles = StyleSheet.create({
     height: 36,
   }, 
   photoPie:{
-    flex:            1,
-    backgroundColor: 'green'
+    flex:1,
+    marginLeft:20,
+    marginRight:20,
+    backgroundColor: 'white',
+    borderRadius:10,
+    flexDirection:'row'
   },
   photo_set:{
-    margin:12,
     flex:1,
     resizeMode: Image.resizeMode.contain,
   },

@@ -14,11 +14,25 @@ var {
 
 
 var ItemDetails = React.createClass({
+
+	getPhotos(){
+		var images = []
+		this.props.data.photos.forEach((ele) => {
+			console.log(ele);
+			images.push(
+				<Image style={styles.image_card} source={ele} />
+			)
+		})
+		return images;
+	},
+
 	render :function() {
+
 		return (
 			<View style={styles.detailContainer}>
 				<ScrollView style={styles.scrollarea}>
 					<Text style={styles.article}>{this.props.data.title}</Text>
+					{this.getPhotos()}
 				</ScrollView>
 				
 				<View style={styles.dateView}>
@@ -45,7 +59,16 @@ var styles = StyleSheet.create({
 	},
 	article:{
 		fontSize:13,
-		color:'#75675a'
+		color:'#75675a',
+		margin:12
+	},
+	image_card:{
+		flex:1,
+		backgroundColor:'#fff',
+		height:160,
+		margin:20,
+		resizeMode: Image.resizeMode.cover,
+		borderRadius:20,
 	},
 	dateView:{
 		alignSelf:'flex-end',

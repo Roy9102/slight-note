@@ -109,6 +109,7 @@ var NavBar = React.createClass({
         onResponderMove={didMoveFinger}
         onResponderTerminationRequest={preventDefault}>
         <Content
+          RCTDeviceEventEmitter={this.props.RCTDeviceEventEmitter} 
           name={route.name}
           index={route.index}
           data={route.data}
@@ -150,6 +151,7 @@ var NavBar = React.createClass({
 
     return (
       <Navigator
+        RCTDeviceEventEmitter={this.props.RCTDeviceEventEmitter} 
         initialRoute={this.props.firstRoute}
         navigationBar={navigationBar}
         renderScene={this.renderScene}

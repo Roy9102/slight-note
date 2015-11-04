@@ -41,9 +41,10 @@ var NavBarContainer = React.createClass({
 
   // We render both the current and the previous navbar (for animation)
   render: function() {
+
     return (
       <View style={[styles.navbarContainer, this.props.style]}>
-        <NavBarContent 
+        <NavBarContent
           route={this.state.previousRoute} 
           backButtonComponent={this.props.backButtonComponent}
           rightCorner={this.props.rightCorner}
