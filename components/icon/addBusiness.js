@@ -57,7 +57,7 @@ var CreateOne = React.createClass({
 				activeOpacity = {0.8}
 				onPress = {this.addOne}
 			>
-				<Image style={style.icon} source={require('image!add_icon')}/>
+				<Image style={style.icon} source={require('../../images/add_icon.png')}/>
 			</TouchableHighlight>
 		)
 	}

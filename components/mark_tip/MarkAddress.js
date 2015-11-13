@@ -79,7 +79,7 @@ var MarkAddress = React.createClass({
             >
             	<View style={styles.addressBox}>
             		<ActivityIndicatorIOS animating={this.state.isLoading} style={styles.loading} color='#918a84' />
-            		<Image style={styles.posIcon} source={require('image!posIcon')} />
+            		<Image style={styles.posIcon} source={require('../../images/posIcon.png')} />
                 	<Text style={styles.address} ref={'address'}>{this.state.address}</Text>
                 </View>
             </TouchableHighlight>

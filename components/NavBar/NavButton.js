@@ -24,7 +24,7 @@ var NavButton = React.createClass({
       var BackButton = this.props.backButtonComponent;
       backButton = <View><BackButton /></View>
     } else {
-      backButton = <View style={styles.backBtn}><Image style={styles.backIcon} source={require('image!backIcon')} /></View>
+      backButton = <View style={styles.backBtn}><Image style={styles.backIcon} source={require('../../images/backIcon.png')} /></View>
     }
 
     return (

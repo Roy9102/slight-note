@@ -25,7 +25,7 @@ var searchAndEdit = React.createClass({
 		return (
 			<View style={style.container}>
 				<SearchInput />
-				<Image style={style.icon} source={require('image!add_icon')}/>
+				<Image style={style.icon} source={require('../../images/add_icon.png')}/>
 			</View>
 		)
 	}

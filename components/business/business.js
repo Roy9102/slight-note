@@ -94,7 +94,7 @@ var Business = React.createClass({
 				res = (
 						<Image 
 							style = {styles.cIcon}
-							source = {require('image!alarm')}
+							source = {require('../../images/alarm.png')}
 						/>
 					)
 				break;
@@ -102,7 +102,7 @@ var Business = React.createClass({
 				res = (
 						<Image 
 							style = {styles.cIcon}
-							source = {require('image!photo')}
+							source = {require('../../images/photo.png')}
 						/>
 					)
 				break;
@@ -110,7 +110,7 @@ var Business = React.createClass({
 				res = (
 						<Image 
 							style = {styles.cIcon}
-							source = {require('image!taxi')}
+							source = {require('../../images/taxi.png')}
 						/>
 					)
 				break;
@@ -118,7 +118,7 @@ var Business = React.createClass({
 				res = (
 						<Image 
 							style = {styles.cIcon}
-							source = {require('image!record')}
+							source = {require('../../images/record.png')}
 						/>
 					)
 				break;
@@ -145,7 +145,7 @@ var Business = React.createClass({
 					onPress={this.deleteItem}
 				>
 					<View style={styles.deleteIcon}>
-						<Image style={styles.trash} source={require('image!trash')} />
+						<Image style={styles.trash} source={require('../../images/trash.png')} />
 						<Text style={styles.trashText}>删除</Text>
 					</View>
 				</TouchableHighlight>
@@ -155,7 +155,7 @@ var Business = React.createClass({
 				>
 					<Image
 						style={[styles.listicon,styles.ellipse]}
-						source={require('image!ellipse')}
+						source={require('../../images/ellipse.png')}
 					/>
 					<Text style={styles.literation}>{literation}</Text>
 					<Text style={styles.date}>{date}</Text>
@@ -165,7 +165,7 @@ var Business = React.createClass({
 				</Animated.View>
 				<Image
 					style={[styles.listicon,styles.line]}
-					source={require('image!line')}
+					source={require('../../images/line.png')}
 				/>
 			</View>
 		)

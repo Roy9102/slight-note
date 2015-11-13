@@ -1,21 +1,18 @@
 /**
- * Xiaowa
+ * xiaoWa
  * https://github.com/facebook/react-native
  */
 'use strict';
 
 var React = require('react-native');
 
-var NavBar = require('./components/NavBar/NavBar');
-var Business = require('./components/business/business');
-var RCTDeviceEventEmitter = require('RCTDeviceEventEmitter');
-var XiaoWaBtn = require('./components/XiaoWaIcon/xiaowa');
-var searchAndEdit = require('./components/searchAndEdit/searchAndEdit')
-var addBussiness = require('./components/icon/addBusiness');
 
 
 //页面组件
-var HomePage = require('./pages/homePage');
+var HomePage     = require('./pages/homePage');
+var NavBar       = require('./components/NavBar/NavBar');
+var Business     = require('./components/business/business');
+var addBussiness = require('./components/icon/addBusiness');
 
 var {
   AppRegistry,
@@ -34,7 +31,7 @@ var firstRoute = {
   rightCorner : addBussiness
 };
 
-var xiaowa = React.createClass({
+var xiaoWa = React.createClass({
   getInitialState: function() {
     return {};
   },
@@ -42,8 +39,7 @@ var xiaowa = React.createClass({
     return (
       <NavBar
         firstRoute={firstRoute} 
-        headerStyle={styles.header}
-      />
+        headerStyle={styles.header}/>
     );
   }
 });
@@ -59,7 +55,8 @@ var styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('xiaowa', () => xiaowa);
+
+AppRegistry.registerComponent('xiaoWa', () => xiaoWa);
 
 
 

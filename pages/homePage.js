@@ -1,10 +1,11 @@
 'use strict';
 
 
-var React = require('react-native');
-var Business = require('../components/business/business');
-var DB    = require('../db');
-var DBEvents = require('react-native-db-models').DBEvents;
+var React               = require('react-native');
+var DBEvents            = require('react-native-db-models').DBEvents;
+var RefreshableListView = require('react-native-refreshable-listview')
+var Business            = require('../components/business/business');
+var DB                  = require('../db');
 
 var {
 	StyleSheet,
@@ -16,10 +17,6 @@ var {
 	TouchableHighlight
 } = React;
 
-var {
-  RefresherListView,
-  LoadingActivityIndicatorIOS
-} = require('react-native-refresher');
 
 
 var Homepage = React.createClass({
@@ -79,14 +76,13 @@ var Homepage = React.createClass({
 				activeOpacity = {1}
 				onPress = {this.onPress}
 			>
-	        	<RefresherListView
-		          	threshold = {30}
+	        	<RefreshableListView
 		          	style = {styles.listStyle}
-		          	onRefresh = {this.fetchData}
-	      			indicator = {<LoadingActivityIndicatorIOS />}
+		          	refreshDescription ="fdsfsadfdas"
+		          	loadData = {this.fetchData}
 		            dataSource = {this.state.dataSource}
-		            renderRow = {this.render_list}
-		        />
+		            renderRow = {this.render_list}>
+		        </RefreshableListView>
 		    </TouchableHighlight>
 	    );
 	  }
@@ -103,4 +99,4 @@ var styles = StyleSheet.create({
 });
 
 
-module.exports = Homepage
+module.exports = Homepage;

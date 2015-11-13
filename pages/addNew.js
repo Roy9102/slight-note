@@ -4,12 +4,18 @@
 
 'use strict';
 
-var React = require('react-native');
-var DB    = require('../db');
-var DBEvents = require('react-native-db-models').DBEvents;
+var React         = require('react-native');
+var DB            = require('../db');
+var DBEvents      = require('../node_modules/react-native-db-models').DBEvents;
+var EmojiPicker   = require('../components/icon/EmojiPicker');
+var ImagePicker   = require('../components/icon/imagePicker');
+var MarkAddress   = require('../components/mark_tip/MarkAddress');
+var Modal         = require('react-native-modalbox'); //modal
 var SPRING_CONFIG = {tension: 1, friction: 3}; //Soft spring
-var ImagePicker = require('../components/icon/imagePicker');
-var MarkAddress = require('../components/mark_tip/MarkAddress');
+var {
+    Emoji,
+    EmojiList
+} = require('react-native-emoji');
 
 
 
@@ -35,46 +41,51 @@ var FuncIcon = React.createClass({
    
     componentDidMount(){
     },
+
     render_img (img){
         var res = null;
         switch(img){
             case 'alarm' : 
                 res = (
-                        <Image style={styles.typeIcon} source={require('image!alarm')} /> 
+                        <Image style={styles.typeIcon} source={require('../images/alarm.png')} /> 
                     )
                 break;
             case 'photo' : 
                 res = (
-                        <Image style={styles.typeIcon} source={require('image!photo')} /> 
+                        <Image style={styles.typeIcon} source={require('../images/photo.png')} /> 
                     )
                 break;
             case 'taxi_150' : 
                 res = (
-                        <Image style={styles.typeIcon} source={require('image!taxi_150')} /> 
+                        <Image style={styles.typeIcon} source={require('../images/taxi_150.png')} /> 
                     )
                 break;
             case 'record' : 
                 res = (
-                        <Image style={styles.typeIcon} source={require('image!record')} /> 
+                        <Image style={styles.typeIcon} source={require('../images/record.png')} /> 
                     )
                 break;
             case 'package':
                 res = (
-                        <Image style={styles.typeIcon} source={require('image!package')} /> 
+                        <Image style={styles.typeIcon} source={require('../images/package.png')} /> 
                     )
                 break;
             case 'shopping_cart':
                 res = (
-                        <Image style={styles.typeIcon} source={require('image!shopping_cart')} /> 
+                        <Image style={styles.typeIcon} source={require('../images/shopping_cart.png')} /> 
                     )
                 break;
             case 'video':
                 res = (
-                        <Image style={styles.typeIcon} source={require('image!video')} /> 
+                        <Image style={styles.typeIcon} source={require('../images/video.png')} /> 
                     )
                 break;
         }
         return res;
+    },
+
+    onPress(){
+        this.props.onClick();
     },
 
     render (){
@@ -83,6 +94,7 @@ var FuncIcon = React.createClass({
                 style={styles.moreList}
                 underlayColor = 'rgba(0,0,0,0)'
                 activeOpacity = {0.8}
+                onPress = {this.onPress}
             >
                 <View>
                     <View style={styles.iconView}>
@@ -101,22 +113,25 @@ var newPage = React.createClass({
         return {
             literation : 'hello',
             func_area_height:60,
-            ImageCard_height:0,
+            ImageCard_opacity:0,
             photos : [],
             Images:[],
-            iconArray:[]
+            iconArray:[],
+            isModalOpen:false
         }
     },
 
+    //添加图片
     addImage (source){
         var arr = this.state.Images;
         var photos = this.state.photos;
         photos.push(source);
         arr.push(
-            <Image style={styles.photo_set} source={source} />
+            <Animated.View style={this.getImageCardStyle()}>
+                <Image style={styles.photoPie} source={source} />           
+            </Animated.View>
         )
         if (this.state.ImageCard_height){
-
             this.setState({
                 Images:arr,
                 photos:photos
@@ -126,7 +141,7 @@ var newPage = React.createClass({
             this.setState({
                 Images:arr,
                 photos:photos,
-                ImageCard_height:150
+                ImageCard_opacity:1
             });
         }
         if (!this.state.iconArray.find((n) => {return n === 'photo'})){
@@ -136,6 +151,24 @@ var newPage = React.createClass({
                 iconArray:iArr
             })
         }
+    },
+
+    getImageCardStyle(){
+        return [
+            {
+                opacity: this.state.ImageCard_opacity
+            }
+        ]
+    },
+
+    // addEmoji 
+    addEmoji (){
+        this.refs.modal1.open()
+    },
+
+    //添加出行计划
+    addTripPlan (){
+        this.refs.modal1.open()
     },
 
     onChangeText (text){
@@ -157,24 +190,12 @@ var newPage = React.createClass({
     },
 
 
-    getStyle (){
+    getFuncStyle (){
         return [
             {
                 height: this.state.func_area_height
             }
         ]
-    },
-
-    getImageCardStyle(){
-        return [
-            styles.photoPie,
-            {
-                height: this.state.ImageCard_height
-            }
-        ]
-    },
-
-    componentDidMount(){
     },
 
     ToggleClick(){
@@ -185,7 +206,21 @@ var newPage = React.createClass({
         //     ...SPRING_CONFIG,
         //     toValue: {x: 0, y: 0}                        // return to start
         // }).start();
+    }, 
+
+    onOpen(){
+        this.refs.modal1.open()
     },
+    onClose(){
+        this.refs.modal1.close()
+    },
+    onClosingState(){
+        this.refs.modal1.closingState()
+    },
+
+    componentDidMount(){
+    },
+
     render (){
         return (
             <View style={styles.container}>
@@ -198,23 +233,22 @@ var newPage = React.createClass({
                         multiline={true}
                         onEndEditing = {this.submitEdit}
                     />
-                    <Animated.View style={this.getImageCardStyle()}>
-                       {this.state.Images}
-                    </Animated.View>
-
+                    <View>
+                        {this.state.Images}
+                    </View>
+                    
                 </ScrollView>
-                <Text style={styles.date}>{this.props.data.date}</Text>
-                <MarkAddress ref="address" />              
 
-                <Animated.View style={this.getStyle()}>
+                <View style={styles.footer}>
+                    <Text style={styles.date}>{this.props.data.date}</Text>
+                    <MarkAddress ref="address" />              
+                </View>
+
+
+                <Animated.View style={this.getFuncStyle()}>
                     <View style={styles.ele_list}>
-                        <TouchableHighlight
-                            underlayColor = 'rgba(0,0,0,0)'
-                            activeOpacity = "0.8"
-                        >
-                            <Image style={styles.icon} source={require('image!smiley')} />
-                        </TouchableHighlight>
-
+                       
+                        <EmojiPicker addEmoji = {this.addEmoji} />
                         <ImagePicker addImage = {this.addImage} ref = "photoPicker" />  
 
                         <TouchableHighlight
@@ -223,12 +257,12 @@ var newPage = React.createClass({
                             underlayColor = 'rgba(0,0,0,0)'
                             activeOpacity = "0.8"
                         >
-                            <Image style={styles.icon} source={require('image!plus_gray')} />
+                            <Image style={styles.icon} source={require('../images/plus_gray.png')} />
                         </TouchableHighlight>                
                     </View>
                     <View style={styles.itemType}>
                         <View style={styles.typeRow}>
-                            <FuncIcon img='taxi_150' text='出行计划' />
+                            <FuncIcon img='taxi_150' onClick={this.addTripPlan} text='出行计划' />
                             <FuncIcon img='alarm' text='闹钟提醒' />
                             <FuncIcon img='record' text='语音录制' />
                         </View>
@@ -239,6 +273,19 @@ var newPage = React.createClass({
                         </View>
                     </View>
                 </Animated.View>
+
+
+                <Modal 
+                    style={[styles.modal]}
+                    isOpen          = {this.state.isModalOpen} 
+                    ref             = {"modal1"} onClosed={this.onClose} 
+                    onOpened        = {this.onOpen} 
+                    onClosingState  = {this.onClosingState}
+                    position        = {"center"} 
+                    backdropContent = {<Text>Hello</Text>}
+                >
+                  <EmojiList />
+                </Modal>
             </View>
         )
     }
@@ -248,6 +295,10 @@ var styles = StyleSheet.create({
   container: {
     backgroundColor: '#fcfaf0',
     flex:            1
+  },
+  modal:{
+    width:300,
+    height:300
   },
   inputbox:{
     flex:1,
@@ -308,13 +359,8 @@ var styles = StyleSheet.create({
     flex:1,
     marginLeft:20,
     marginRight:20,
-    backgroundColor: 'white',
-    borderRadius:10,
-    flexDirection:'row'
-  },
-  photo_set:{
-    flex:1,
-    resizeMode: Image.resizeMode.contain,
+    height:160,
+     borderRadius:10
   },
   date:{
     color:        "#75675a",
@@ -322,11 +368,11 @@ var styles = StyleSheet.create({
     alignSelf:    'flex-end',
     marginRight:  12,
     marginBottom: 6,
+  },
+  footer:{
+    
   }
 })
  
-
-
-
 
 module.exports  = newPage;

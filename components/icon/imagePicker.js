@@ -22,49 +22,40 @@ var {
 } = React;
 
 var options = {
-	title: 'Select Photo',
+	title: 'Select your Moments', // specify null or empty string to remove the title
 	cancelButtonTitle: 'Cancel',
-	takePhotoButtonTitle: 'Take Photo...',
-	takePhotoButtonHidden: false,
-	chooseFromLibraryButtonTitle: 'Choose from Library...',
-	chooseFromLibraryButtonHidden: false,
+	takePhotoButtonTitle: 'Take Photo...', // specify null or empty string to remove this button
+	chooseFromLibraryButtonTitle: 'Choose from Library...', // specify null or empty string to remove this button
+	// customButtons: {
+	// 	'Choose Photo from Facebook': 'fb', // [Button Text] : [String returned upon selection]
+	// },
 	maxWidth: 100,
 	maxHeight: 100,
-	returnBase64Image: false,
-	returnIsVertical: false,
-	quality: 0.2,
-	allowsEditing: true, // Built in iOS functionality to resize/reposition the image
-	//storageOptions: {   // if provided, the image will get saved in the documents directory (rather than tmp directory)
-	//  skipBackup: true, // will set attribute so the image is not backed up to iCloud
-	//  path: "images",   // will save image at /Documents/images rather than the root
-	//}
+	quality: 1,
+	allowsEditing: false, // Built in iOS functionality to resize/reposition the image
+	noData: false, // Disables the base64 `data` field from being generated (greatly improves performance on large photos)
+	storageOptions: { // if this key is provided, the image will get saved in the documents directory (rather than a temporary directory)
+		skipBackup: true, // image will NOT be backed up to icloud
+		path: 'Xiaowa' // will save image at /Documents/images rather than the root
+	}
 };
 
 var ImagePicker = React.createClass({
-	getInitialState (){
-		return {
-			source:null
-		}
-	},
-
 	onPress(){
-		UIImagePickerManager.showImagePicker(options, (responseType, response) => {
+		UIImagePickerManager.showImagePicker(options, (didCancel, response) => {
+			console.log('Response = ', response);
+
 		
-				if (responseType !== 'cancel') {
-					let source;
-				if (responseType === 'data') { // New photo taken OR passed returnBase64Image true -  response is the 64 bit encoded image data string
-				  	source = {uri: 'data:image/jpeg;base64,' + response, isStatic: true};
-				  	this.setState({
-				  		source :source
-				  	})
-				}
-				else if (responseType === 'uri') { // Selected from library - response is the URI to the local file asset
-				  	source = {uri: response.replace('file://', ''), isStatic: true};
-				  	this.setState({
-				  		source :source
-				  	})
-				}
-				this.props.addImage(source);
+			if (didCancel) {
+				console.log('User cancelled image picker');
+			}
+			else {
+				
+				// You can display the image using either:
+				const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+				// const source = {uri: response.uri.replace('file://', ''), isStatic: true};
+
+				this.props.addImage(source)				
 			}
 		});
 	},
@@ -72,10 +63,10 @@ var ImagePicker = React.createClass({
 		return (
 			<TouchableHighlight
                 underlayColor = 'rgba(0,0,0,0)'
-                activeOpacity = "0.8"
+                activeOpacity = {0.8}
                 onPress = {this.onPress}
             >
-                <Image style={styles.icon} source={require('image!photo')} />
+                <Image style={styles.icon} source={require('../../images/photo.png')} />
             </TouchableHighlight>	
 		)
 	}

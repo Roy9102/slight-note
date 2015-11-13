@@ -18,7 +18,6 @@ var ItemDetails = React.createClass({
 	getPhotos(){
 		var images = []
 		this.props.data.photos.forEach((ele) => {
-			console.log(ele);
 			images.push(
 				<Image style={styles.image_card} source={ele} />
 			)
@@ -40,7 +39,7 @@ var ItemDetails = React.createClass({
 				</View>
 
 				<View style={styles.locationView}>
-					<Image style={styles.posIcon} source={require('image!posIcon')} />
+					<Image style={styles.posIcon} source={require('../images/posIcon.png')} />
 					<Text style={styles.address}>{this.props.data.address}</Text>
 				</View>
 				
@@ -68,7 +67,7 @@ var styles = StyleSheet.create({
 		height:160,
 		margin:20,
 		resizeMode: Image.resizeMode.cover,
-		borderRadius:20,
+		borderRadius:10,
 	},
 	dateView:{
 		alignSelf:'flex-end',

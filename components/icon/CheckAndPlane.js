@@ -27,7 +27,7 @@ var CheckIcon = React.createClass({
 				activeOpacity = {0.8}
 				onPress = {this.props.customAction}
 			>
-				<Image style = {style.icon} source = {require('image!check')} />
+				<Image style = {style.icon} source = {require('../../images/check.png')} />
 			</TouchableHighlight>
 		)
 	}
@@ -45,7 +45,7 @@ var PlaneIcon = React.createClass({
 				activeOpacity = {0.8}
 				onPress = {this.completeInput}
 			>
-				<Image style = {style.icon} source = {require('image!plane')} />
+				<Image style = {style.icon} source = {require('../../images/plane.png')} />
 			</TouchableHighlight>
 		)
 	}

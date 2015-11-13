@@ -17,7 +17,7 @@ var XiaoWaBtn = React.createClass({
 		return (
 			<TouchableHighlight onPress = {this.onPress} underlayColor = 'transparent' activeOpacity = "0.8" >
 				<Image 
-					source = {require('image!xiaowa')}
+					source = {require('../../images/xiaowa.png')}
 					style = {style.xiaowa}
 				/>
 			</TouchableHighlight>	
