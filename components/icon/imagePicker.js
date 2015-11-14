@@ -52,8 +52,8 @@ var ImagePicker = React.createClass({
 			else {
 				
 				// You can display the image using either:
-				const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
-				// const source = {uri: response.uri.replace('file://', ''), isStatic: true};
+				// const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+				const source = {uri: response.uri.replace('file://', ''), isStatic: true};
 
 				this.props.addImage(source)				
 			}

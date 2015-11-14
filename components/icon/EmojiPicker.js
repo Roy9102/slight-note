@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 
+
 var {
   StyleSheet,
   Text,
@@ -16,7 +17,7 @@ var {
 var EmojiPicker = React.createClass({
 
 	onClick(){
-		this.props.addEmoji()
+		this.props.showEmoji()
 	},
 
 	render (){

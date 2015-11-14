@@ -77,11 +77,12 @@ var Homepage = React.createClass({
 				onPress = {this.onPress}
 			>
 	        	<RefreshableListView
-		          	style = {styles.listStyle}
-		          	refreshDescription ="fdsfsadfdas"
-		          	loadData = {this.fetchData}
-		            dataSource = {this.state.dataSource}
-		            renderRow = {this.render_list}>
+		          	style              = {styles.listStyle}
+		          	refreshDescription = "Pull to Refresh"
+		          	loadData           = {this.fetchData}
+		            dataSource 		   = {this.state.dataSource}
+		            renderRow          = {this.render_list}
+		        >
 		        </RefreshableListView>
 		    </TouchableHighlight>
 	    );
@@ -94,6 +95,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#fcf6dc',
   },
   listStyle:{
+  	marginTop:12,
   	flex:1,
   },
 });
