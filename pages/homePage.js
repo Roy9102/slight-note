@@ -47,7 +47,11 @@ var Homepage = React.createClass({
 	},
 
 	componentDidMount (){
-		this.fetchData()
+		var self = this;
+		this.fetchData();
+		DBEvents.on('all',function(){
+			self.fetchData();
+		})
 	},
 
 	onPress (){

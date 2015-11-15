@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-var AMAP_URL = 'http://restapi.amap.com/v3/geocode/regeo?key=d169ff232ccab96b8fa19e7e25303844&';
+var LocationMinix = require('../Minix/Amap_API');
 
 var {
 	StyleSheet,
@@ -13,7 +13,7 @@ var {
 } = React;
 
 var MarkAddress = React.createClass({
-
+	mixins:[LocationMinix],
 	getInitialState (){
 		return {
 			address:'正在获取当前的地理位置',
@@ -21,34 +21,32 @@ var MarkAddress = React.createClass({
 		}
 	},
 
-	getAddress (){
+	getLocated (){
         var me = this;
         var options = {
             enableHighAccuracy: true,
             timeout: 5000,
             maximumAge: 0
         };        
-        navigator.geolocation.getCurrentPosition(function(pos){
-            var coords = pos.coords;
-            var lnglat = [coords.longitude,coords.latitude];
-            var url = AMAP_URL + 'location='+lnglat.join(',');
+        navigator.geolocation.getCurrentPosition((pos) => {
 
-            fetch(url).then((response) => response.text())
-                .then((responseText) => {
-                    var res = JSON.parse(responseText);
-                    // console.log(me.refs);
-                    me.setState({
-                        address:res.regeocode.formatted_address,
-                        isLoading:false
-                    })
-                    console.log(res);
-                })
-                .catch((error) => {
-                    console.warn(error);
-                });
-        },function(){
+            me.getAddress(pos)
+            .then((response) => response.text())
+            .then((res) => {
+            	me.setState({
+	                address:res.address,
+	                isLoading:false,
+	            })
+            }).catch((err) => {
+            	console.warn(err);
+            	me.setState({
+	                address:'获取地址失败,点击此处重新获取',
+	                isLoading:false,
+	            })
+            })
+        },(err) => {
         	me.setState({
-                address:'获取地址失败,点击此处重新获取',
+                address:'获取地址失败,请允许软件获取你的定位信息',
                 isLoading:false,
             })
         },options)
@@ -56,15 +54,27 @@ var MarkAddress = React.createClass({
     },
 	
 	componentDidMount(){
-		this.getAddress();
+		this.getLocated();
+		this.getDirectionByType()
+		.then((response) => response.text())
+		.done((res) => {
+			const resObj = JSON.parse(res);
+			if (!resObj.status && resObj.info !== 'ok'){
+				console.log(resObj.info);
+				return;
+			}
+
+			console.log(`一共为您推荐${resObj.count}条路线,耗时${resObj.route.paths[0].duration}秒`);
+
+		});
 	},
 
 	reGetAddress(){
 		this.setState({
-            address:'正在获取当前的地理位置',
+            address:'正在获取当前的地理位置...',
             isLoading:true
         });
-        this.getAddress();
+        this.getLocated();
 	},
 
 
