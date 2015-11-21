@@ -4,7 +4,7 @@
 'use strict';
 
 var React    = require('react-native');
-var DB       = require('../db');
+var DB       = require('../../db');
 var DBEvents = require('react-native-db-models').DBEvents;
 
 
@@ -21,9 +21,10 @@ var StoreEvent = {
 	           reslove(result.rows);
 	        })
 		});
+		return promise;
 	}
 } 
 
 
 
-module.exports = SotreEvent;
+module.exports = StoreEvent;

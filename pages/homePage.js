@@ -30,6 +30,7 @@ var Homepage = React.createClass({
 	fetchData(){
 		var me = this;
 		SotreDB.getAll().then(function(result){
+			console.log(result);
 			me.setState({
             	dataSource: me.state.dataSource.cloneWithRows(me.ObjToArray(result.rows)),
             })
