@@ -1,7 +1,7 @@
 'use strict';
 
 
-var React = require('react-native');
+let React = require('react-native');
 var UIImagePickerManager = require('NativeModules').UIImagePickerManager;
 
 var {
@@ -17,11 +17,11 @@ var {
   AsyncStorage,
   Animated,
   NativeModules: {
-    UIImagePickerManager
+	UIImagePickerManager
   }
 } = React;
 
-var options = {
+let options = {
 	title: 'Select your Moments', // specify null or empty string to remove the title
 	cancelButtonTitle: 'Cancel',
 	takePhotoButtonTitle: 'Take Photo...', // specify null or empty string to remove this button
@@ -40,7 +40,7 @@ var options = {
 	}
 };
 
-var ImagePicker = React.createClass({
+let ImagePicker = React.createClass({
 	onPress(){
 		UIImagePickerManager.showImagePicker(options, (didCancel, response) => {
 			console.log('Response = ', response);
@@ -62,22 +62,22 @@ var ImagePicker = React.createClass({
 	render (){
 		return (
 			<TouchableHighlight
-                underlayColor = 'rgba(0,0,0,0)'
-                activeOpacity = {0.8}
-                onPress = {this.onPress}
-            >
-                <Image style={styles.icon} source={require('../../images/photo.png')} />
-            </TouchableHighlight>	
+				underlayColor = 'rgba(0,0,0,0)'
+				activeOpacity = {0.8}
+				onPress = {this.onPress}
+			>
+				<Image style={styles.icon} source={require('../../images/photo.png')} />
+			</TouchableHighlight>	
 		)
 	}
 })
 
 
-var styles = StyleSheet.create({
+let styles = StyleSheet.create({
 	icon:{
-	    width:30,
-	    height:30,
-	    margin:20
+		width:30,
+		height:30,
+		margin:20
 	}
 })
 

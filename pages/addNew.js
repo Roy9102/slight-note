@@ -6,12 +6,10 @@
 
 var React             = require('react-native');
 var DB                = require('../db');
-var DBEvents          = require('react-native-db-models').DBEvents;
 var EmojiPicker       = require('../components/icon/EmojiPicker');
 var ImagePicker       = require('../components/icon/imagePicker');
 var FuncIcon          = require('../components/icon/FuncIcon');
 var MarkAddress       = require('../components/mark_tip/MarkAddress');
-var ScrollableTabView = require('react-native-scrollable-tab-view');
 var Swiper            = require('react-native-swiper');
 var Modal             = require('react-native-modalbox'); //modal
 var {
@@ -102,7 +100,8 @@ var newPage = React.createClass({
 
     // addEmoji 
     addEmoji(emoji){
-        var text = [this.state.literation,nodeEmoji.get(emoji)];
+       
+        var text = [this.state.literation,emoji];
         this.setState({
             literation: text.join('')
         })

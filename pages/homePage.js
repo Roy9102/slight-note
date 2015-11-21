@@ -2,10 +2,10 @@
 
 
 var React               = require('react-native');
-var DBEvents            = require('react-native-db-models').DBEvents;
 var RefreshableListView = require('react-native-refreshable-listview')
 var Business            = require('../components/business/business');
 var DB                  = require('../db');
+
 
 var {
 	StyleSheet,
@@ -49,9 +49,6 @@ var Homepage = React.createClass({
 	componentDidMount (){
 		var self = this;
 		this.fetchData();
-		DBEvents.on('all',function(){
-			self.fetchData();
-		})
 	},
 
 	onPress (){
@@ -67,7 +64,8 @@ var Homepage = React.createClass({
 	        	date = {rowData.date}
 	          	iconArray = {rowData.iconArray}
 	          	goToDetail = {this.props.toRoute}
-	          	reFresh = {this.fetchData}/>
+	          	reFresh = {this.fetchData}
+	          	/>
      	)
   	},
 
