@@ -4,7 +4,7 @@
 var React               = require('react-native');
 var RefreshableListView = require('react-native-refreshable-listview')
 var Business            = require('../components/business/business');
-var DB                  = require('../db');
+var SotreDB             = require('../components/EventEmit/SotreEvent');
 
 
 var {
@@ -29,12 +29,17 @@ var Homepage = React.createClass({
 
 	fetchData(){
 		var me = this;
-		DB.bussiness.get_all(function(result){
-            // console.log(result);
-            me.setState({
+		SotreDB.getAll().then(function(result){
+			me.setState({
             	dataSource: me.state.dataSource.cloneWithRows(me.ObjToArray(result.rows)),
             })
-        })
+		})
+		// DB.bussiness.get_all(function(result){
+  //           // console.log(result);
+  //           me.setState({
+  //           	dataSource: me.state.dataSource.cloneWithRows(me.ObjToArray(result.rows)),
+  //           })
+  //       })
   		
 	},
 
