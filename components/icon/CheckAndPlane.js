@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react-native');
-// var RCTDeviceEventEmitter = require('RCTDeviceEventEmitter');
+var React   = require('react-native');
+var SotreDB = require('../EventEmit/SotreEvent');
 
 var {
 	StyleSheet,
@@ -14,9 +14,7 @@ var {
 var CheckIcon = React.createClass({
 	completeInput (){
 
-	},
-	componentDidMount(){
-		
+		SotreDB.saveItem()
 	},
 
 	render (){
@@ -25,7 +23,7 @@ var CheckIcon = React.createClass({
 				style={style.check}
 				underlayColor = '#6fc6c0'
 				activeOpacity = {0.8}
-				onPress = {this.props.customAction}
+				onPress = {this.completeInput}
 			>
 				<Image style = {style.icon} source = {require('../../images/check.png')} />
 			</TouchableHighlight>
@@ -34,9 +32,6 @@ var CheckIcon = React.createClass({
 })
 
 var PlaneIcon = React.createClass({
-	completeInput (){
-
-	},
 	render (){
 		return (
 			<TouchableHighlight

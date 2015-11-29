@@ -4,14 +4,18 @@
 
 'use strict';
 
-var React             = require('react-native');
-var DB                = require('../db');
-var EmojiPicker       = require('../components/icon/EmojiPicker');
-var ImagePicker       = require('../components/icon/imagePicker');
-var FuncIcon          = require('../components/icon/FuncIcon');
-var MarkAddress       = require('../components/mark_tip/MarkAddress');
-var Swiper            = require('react-native-swiper');
-var Modal             = require('react-native-modalbox'); //modal
+var React       = require('react-native');
+var DB          = require('../db');
+var EmojiPicker = require('../components/icon/EmojiPicker');
+var ImagePicker = require('../components/icon/imagePicker');
+var FuncIcon    = require('../components/icon/FuncIcon');
+var MarkAddress = require('../components/mark_tip/MarkAddress');
+var Swiper      = require('react-native-swiper');
+var Modal       = require('react-native-modalbox'); //modal
+var SotreDB     = require('../components/EventEmit/SotreEvent');
+
+var DateFormater = require('../components/Mixins/DateFormater');
+
 var {
     Emoji,
     nodeEmoji,
@@ -31,7 +35,8 @@ var {
   AsyncStorage,
   Animated,
   LayoutAnimation,
-  Dimensions
+  Dimensions,
+  PushNotificationIOS
 } = React;
 
 const { width, height } = Dimensions.get('window');
@@ -41,16 +46,17 @@ LayoutAnimation.configureNext({
 });
 
 var newPage = React.createClass({
+    mixins:[ DateFormater ],
     getInitialState (){
         return {
-            literation : 'hello',
-            func_area_height:60,
-            ImageCard_opacity:0,
-            isEmojiShow:0,
-            photos : [],
-            Images:[],
-            iconArray:[],
-            isModalOpen:false
+            literation:        '',
+            func_area_height:  60,
+            ImageCard_opacity: 0,
+            isEmojiShow:       0,
+            photos:            [],
+            Images:            [],
+            iconArray:         [],
+            date:              DateFormater.getFormatDate('yyyy年MM月dd日 HH:mm')
         }
     },
 
@@ -78,7 +84,9 @@ var newPage = React.createClass({
             this.setState({
                 iconArray:iArr
             })
-        }
+        };
+
+        this.handleChange();
     },
 
     getImageCardStyle(){
@@ -100,7 +108,6 @@ var newPage = React.createClass({
 
     // addEmoji 
     addEmoji(emoji){
-       
         var text = [this.state.literation,emoji];
         this.setState({
             literation: text.join('')
@@ -116,13 +123,18 @@ var newPage = React.createClass({
         this.setState({
             literation:text
         })
-        
+        this.handleChange();
     },
 
-    submitEdit(){
+    alertMessage(){
+        PushNotificationIOS.requestPermissions();
+    },
+
+    handleChange(){
         var text = this.state.literation;
-        DB.bussiness.add({
-            date: this.props.data.date,
+        SotreDB.createTempItem({
+            key: new Date() * 1,
+            date: this.state.date,
             iconArray: this.state.iconArray,
             photos:this.state.photos,
             title: text,
@@ -154,7 +166,7 @@ var newPage = React.createClass({
                 <ScrollView style={styles.inputbox}>
                     <TextInput ref="textinput" 
                         style={styles.textarea} 
-                        placeholder="Here is you notice" 
+                        placeholder="在这里写下你的点滴......" 
                         value = {this.state.literation} 
                         onChangeText = {this.onChangeText}
                         multiline={true}
@@ -166,7 +178,7 @@ var newPage = React.createClass({
                 </ScrollView>
 
                 <View style={styles.footer}>
-                    <Text style={styles.date}>{this.props.data.date}</Text>
+                    <Text style={styles.date}>{this.state.date}</Text>
                     <MarkAddress ref="address" />              
                 </View>
 
@@ -189,7 +201,7 @@ var newPage = React.createClass({
                     <View style={styles.func_area}>
                         <View style={styles.typeRow}>
                             <FuncIcon img='taxi_150' onClick={this.addTripPlan} text='出行计划' />
-                            <FuncIcon img='alarm' text='闹钟提醒' />
+                            <FuncIcon img='alarm' onClick={this.alertMessage} text='闹钟提醒' />
                             <FuncIcon img='record' text='语音录制' />
                         </View>
                         <View style={styles.typeRow}>

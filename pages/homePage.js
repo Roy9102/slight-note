@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 
 var React               = require('react-native');
-var RefreshableListView = require('react-native-refreshable-listview')
+var RefreshableListView = require('react-native-refreshable-listview');
 var Business            = require('../components/business/business');
 var SotreDB             = require('../components/EventEmit/SotreEvent');
 
@@ -21,6 +21,7 @@ var {
 
 var Homepage = React.createClass({
 	getInitialState: function() {
+
 		var dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		return {
 		  dataSource: dataSource
@@ -32,15 +33,9 @@ var Homepage = React.createClass({
 		SotreDB.getAll().then(function(result){
 			console.log(result);
 			me.setState({
-            	dataSource: me.state.dataSource.cloneWithRows(me.ObjToArray(result.rows)),
+            	dataSource: me.state.dataSource.cloneWithRows(me.ObjToArray(result)),
             })
-		})
-		// DB.bussiness.get_all(function(result){
-  //           // console.log(result);
-  //           me.setState({
-  //           	dataSource: me.state.dataSource.cloneWithRows(me.ObjToArray(result.rows)),
-  //           })
-  //       })
+		});
   		
 	},
 
@@ -55,23 +50,26 @@ var Homepage = React.createClass({
 	componentDidMount (){
 		var self = this;
 		this.fetchData();
+		SotreDB.on('bussiness_change',this.fetchData);
 	},
 
-	onPress (){
+	componentWillUnmount(){
+		SotreDB.off('bussiness_change');
+	},
+
+	onClick (){
 		console.log(this)
+
 	},
 
   	render_list : function(rowData){
-  		var ref = 'item_' + rowData._id;
       	return (
 	        <Business 
-	        	{...rowData}
-	        	literation = {rowData.title}
-	        	date = {rowData.date}
-	          	iconArray = {rowData.iconArray}
+	        	key = {rowData.key}
 	          	goToDetail = {this.props.toRoute}
 	          	reFresh = {this.fetchData}
-	          	/>
+	        	{...rowData}
+	        />
      	)
   	},
 
@@ -82,7 +80,7 @@ var Homepage = React.createClass({
 			    style={styles.container}
 				underlayColor = "#fcf6dc"
 				activeOpacity = {1}
-				onPress = {this.onPress}
+				onPress = {this.onClick}
 			>
 	        	<RefreshableListView
 		          	style              = {styles.listStyle}

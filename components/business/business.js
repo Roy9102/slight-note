@@ -18,7 +18,8 @@ var {
 	Image,
 	StyleSheet,
 	TouchableHighlight,
-	Animated
+	Animated,
+	LayoutAnimation
 } = React;
 
 
@@ -133,12 +134,13 @@ var Business = React.createClass({
 
 	render () {
 		var {
-			literation,
+			title,
 			date,
 			iconArray,
+			key,
 		} = this.props;
 		return (
-			<View style={styles.itemContainer} >
+			<View key={key} style={styles.itemContainer} >
 				<TouchableHighlight
 					underlayColor = 'transparent'
 					activeOpacity = {0.8}
@@ -157,7 +159,7 @@ var Business = React.createClass({
 						style={[styles.listicon,styles.ellipse]}
 						source={require('../../images/ellipse.png')}
 					/>
-					<Text style={styles.literation}>{literation}</Text>
+					<Text style={styles.literation}>{title}</Text>
 					<Text style={styles.date}>{date}</Text>
 					<View style={styles.iconArray}>
 						{this.getIconList(iconArray)}
