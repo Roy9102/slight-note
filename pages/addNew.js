@@ -36,7 +36,8 @@ var {
   Animated,
   LayoutAnimation,
   Dimensions,
-  PushNotificationIOS
+  PushNotificationIOS,
+  DatePickerIOS
 } = React;
 
 const { width, height } = Dimensions.get('window');
@@ -126,8 +127,10 @@ var newPage = React.createClass({
         this.handleChange();
     },
 
-    alertMessage(){
+    setNotification(){
         PushNotificationIOS.requestPermissions();
+
+        // DatePickerIOS.
     },
 
     handleChange(){
@@ -201,7 +204,7 @@ var newPage = React.createClass({
                     <View style={styles.func_area}>
                         <View style={styles.typeRow}>
                             <FuncIcon img='taxi_150' onClick={this.addTripPlan} text='出行计划' />
-                            <FuncIcon img='alarm' onClick={this.alertMessage} text='闹钟提醒' />
+                            <FuncIcon img='alarm' onClick={this.setNotification} text='闹钟提醒' />
                             <FuncIcon img='record' text='语音录制' />
                         </View>
                         <View style={styles.typeRow}>

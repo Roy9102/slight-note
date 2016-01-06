@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-var LocationMinix = require('../Minix/Amap_API');
+var LocationMinix = require('../Mixins/Amap_API');
 
 var {
 	StyleSheet,

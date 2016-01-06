@@ -23,6 +23,10 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		B09BA4271C0AC91600411E17 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B09BA4211C0AC8E300411E17 /* libRCTPushNotification.a */; };
+		B0CA96BB1C12C9CA003692D3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CA96BA1C12C9CA003692D3 /* CoreTelephony.framework */; };
+		B0CA96C81C12C9FA003692D3 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CA96C71C12C9FA003692D3 /* libc++.tbd */; };
+		B0CA96CA1C12CA01003692D3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CA96C91C12CA01003692D3 /* libz.tbd */; };
+		B0CA96CC1C12CA09003692D3 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CA96CB1C12CA09003692D3 /* libsqlite3.0.tbd */; };
 		B0E6756B1BF5B1B700481EA1 /* UIImagePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E6756A1BF5B1B700481EA1 /* UIImagePickerManager.m */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +115,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RCTPushNotification;
 		};
+		B0CA96D11C12CA7D003692D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B0CA96CD1C12CA7D003692D3 /* RCTWeChat.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 86D238421BD0BB9E00C75D01;
+			remoteInfo = RCTWeChat;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -135,6 +146,11 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		B09BA4171C0AC8E300411E17 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
+		B0CA96BA1C12C9CA003692D3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		B0CA96C71C12C9FA003692D3 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		B0CA96C91C12CA01003692D3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		B0CA96CB1C12CA09003692D3 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		B0CA96CD1C12CA7D003692D3 /* RCTWeChat.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWeChat.xcodeproj; path = "../node_modules/react-native-wechat/ios/RCTWeChat.xcodeproj"; sourceTree = "<group>"; };
 		B0E675691BF5B1B700481EA1 /* UIImagePickerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImagePickerManager.h; sourceTree = "<group>"; };
 		B0E6756A1BF5B1B700481EA1 /* UIImagePickerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImagePickerManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,6 +167,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0CA96CC1C12CA09003692D3 /* libsqlite3.0.tbd in Frameworks */,
+				B0CA96CA1C12CA01003692D3 /* libz.tbd in Frameworks */,
+				B0CA96C81C12C9FA003692D3 /* libc++.tbd in Frameworks */,
+				B0CA96BB1C12C9CA003692D3 /* CoreTelephony.framework in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -273,6 +293,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				B0CA96CD1C12CA7D003692D3 /* RCTWeChat.xcodeproj */,
 				B09BA4171C0AC8E300411E17 /* RCTPushNotification.xcodeproj */,
 				B0E675681BF5B1B700481EA1 /* UIImagePickerManager */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -300,6 +321,10 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				B0CA96CB1C12CA09003692D3 /* libsqlite3.0.tbd */,
+				B0CA96C91C12CA01003692D3 /* libz.tbd */,
+				B0CA96C71C12C9FA003692D3 /* libc++.tbd */,
+				B0CA96BA1C12C9CA003692D3 /* CoreTelephony.framework */,
 				13B07FAE1A68108700A75B9A /* xiaoWa */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* xiaoWaTests */,
@@ -322,6 +347,14 @@
 			isa = PBXGroup;
 			children = (
 				B09BA4211C0AC8E300411E17 /* libRCTPushNotification.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B0CA96CE1C12CA7D003692D3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B0CA96D21C12CA7D003692D3 /* libRCTWeChat.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -443,6 +476,10 @@
 					ProjectRef = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
 				},
 				{
+					ProductGroup = B0CA96CE1C12CA7D003692D3 /* Products */;
+					ProjectRef = B0CA96CD1C12CA7D003692D3 /* RCTWeChat.xcodeproj */;
+				},
+				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
@@ -531,6 +568,13 @@
 			fileType = archive.ar;
 			path = libRCTPushNotification.a;
 			remoteRef = B09BA4201C0AC8E300411E17 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B0CA96D21C12CA7D003692D3 /* libRCTWeChat.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTWeChat.a;
+			remoteRef = B0CA96D11C12CA7D003692D3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -662,6 +706,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/**",
+					"$(SRCROOT)/../node_modules/react-native-wechat/**",
 				);
 				INFOPLIST_FILE = xiaoWa/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -681,6 +726,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/**",
+					"$(SRCROOT)/../node_modules/react-native-wechat/**",
 				);
 				INFOPLIST_FILE = xiaoWa/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -731,6 +777,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/**",
+					"$(SRCROOT)/../node_modules/react-native-wechat/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -772,6 +819,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/**",
+					"$(SRCROOT)/../node_modules/react-native-wechat/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

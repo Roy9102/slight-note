@@ -2,7 +2,7 @@
 
 var React   = require('react-native');
 var SotreDB = require('../EventEmit/SotreEvent');
-
+var WeChat  = require('react-native-wechat');
 var {
 	StyleSheet,
 	View,
@@ -32,13 +32,18 @@ var CheckIcon = React.createClass({
 })
 
 var PlaneIcon = React.createClass({
+
+	shareToWeChat(){
+		console.log(WeChat);
+	},
+
 	render (){
 		return (
 			<TouchableHighlight
 				style={style.plane}
 				underlayColor = '#6fc6c0'
 				activeOpacity = {0.8}
-				onPress = {this.completeInput}
+				onPress = {this.shareToWeChat}
 			>
 				<Image style = {style.icon} source = {require('../../images/plane.png')} />
 			</TouchableHighlight>

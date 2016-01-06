@@ -9,6 +9,7 @@
 
 #import "AppDelegate.h"
 #import "RCTPushNotificationManager.h"
+#import "RCTWeChat.h"
 #import "RCTRootView.h"
 
 @implementation AppDelegate
